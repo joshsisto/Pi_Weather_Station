@@ -8,8 +8,8 @@ from email import encoders
 def sendEmail(subject, message_body):
     fromaddr = "smtp-mailjet@joshsisto.com"  # from email address
     toaddr = "josh@joshsisto.com"  # destination email address
-    smtp_user = "591b58f61363d5d9d7518d7e96ecefd0"  # SMTP username used for authentication
-    smtp_pass = "cea1ca5b0ce623b465c02da9816832ad"  # SMTP password used for authentication
+    smtp_user = ""  # SMTP username used for authentication
+    smtp_pass = ""  # SMTP password used for authentication
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr
