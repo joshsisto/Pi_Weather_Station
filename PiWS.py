@@ -1,9 +1,13 @@
 import time
 import datetime
 import csv
+import multiprocessing
+from sendEmail import *
 from math import log
 from flask import Flask, render_template
 from sense_hat import SenseHat
+
+sendEmail('Hot Temp Alert', 'Crazy message body')
 
 app = Flask(__name__)
 
