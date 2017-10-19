@@ -4,7 +4,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 
-# # comment implies that the field needs to be filled in
 def sendEmail(subject, message_body):
     fromaddr = "smtp-mailjet@joshsisto.com"  # from email address
     toaddr = "josh@joshsisto.com"  # destination email address
