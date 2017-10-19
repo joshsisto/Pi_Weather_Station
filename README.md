@@ -1,6 +1,6 @@
 # Pi_Weather_Station
 
-These scripts use a raspberry pi with a Sense HAT to monitor temperature, humidity, pressure, and orientation. It displays the data taken by the Sense HAT on the Sense HAT screen and via the web using Flask. It also logs the data to a .csv file.
+These scripts use a raspberry pi with a Sense HAT to monitor temperature, humidity, pressure, and orientation. It displays the data taken by the sense HAT sensors and prints them to the sense HAT screen and makes the data available via the web browser using Flask. It also logs the data to a .csv file.
 
 These scripts are based off my this original project - https://github.com/llamafarmer/Pi/blob/master/MWS.py
 
