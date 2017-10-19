@@ -4,7 +4,7 @@ These scripts use a raspberry pi with a Sense HAT to monitor temperature, humidi
 
 These scripts are based off my this original project - https://github.com/llamafarmer/Pi/blob/master/MWS.py
 
-Links/sources: https://github.com/kronebone/Cold-Room, https://thepi.io/how-to-set-up-a-raspberry-pi-weather-station-using-the-sense-hat/
+Links/sources: https://github.com/kronebone/Cold-Room, https://thepi.io/how-to-set-up-a-raspberry-pi-weather-station-using-the-sense-hat/, https://veekaybee.github.io/2017/09/26/python-packaging/
 
 # todo
 add joystick functionality
