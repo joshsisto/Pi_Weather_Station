@@ -10,3 +10,7 @@ Links/sources: https://github.com/kronebone/Cold-Room, https://thepi.io/how-to-s
 add joystick functionality
 
 add video
+
+improve web interface (buttons/user input)
+
+Allow user to create email alerts
