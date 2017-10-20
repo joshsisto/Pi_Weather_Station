@@ -1,13 +1,13 @@
 ## Pi_Weather_Station: Weather Station Using Raspberry Pi and Sense HAT
-
+Python 3.4.2 - flask 0.10.1 - sense_hat 2.2.0
 ### Description
 These scripts use a 
 [Raspberry Pi](http://amzn.to/2yB8HcM) with a 
 [Sense HAT](http://amzn.to/2xS8PFX) 
-to monitor temperature, humidity, pressure, and orientation. It displays the data taken by the sense HAT sensors and prints them to the sense HAT 8x8 LED matrix and makes the data available via the web browser using Flask. It also logs the data to a .csv file.
+to monitor temperature, humidity, pressure, and orientation. The sensor information is displayed on the sense HAT 8x8 LED matrix, and via the web browser using Flask. 
 
 ### Getting Started
-On your raspberry pi with sense HAT run the commands lines below
+On your raspberry pi with sense HAT run the command lines below
 
     `sudo apt-get update`
     `sudo apt-get upgrade`
