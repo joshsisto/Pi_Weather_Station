@@ -4,7 +4,8 @@ Python 3.4.2 | flask 0.10.1 | sense_hat 2.2.0
 These scripts use a 
 [Raspberry Pi](http://amzn.to/2yB8HcM) with a 
 [Sense HAT](http://amzn.to/2xS8PFX) 
-to monitor temperature, humidity, pressure, and orientation. The sensor information is displayed on the sense HAT 8x8 LED matrix, and via the web browser using Flask. 
+to monitor temperature, humidity, pressure, and orientation. The sensor information is displayed on the sense HAT 8x8 LED matrix, and via the web browser using 
+[flask.](http://flask.pocoo.org/)
 
 ### Getting Started
 On your raspberry pi with sense HAT run the command lines below
@@ -26,7 +27,35 @@ You then need to change directories to the newly downloaded repository and start
 
 The 8x8 LED matrix should light up and begin scrolling sensor information. You can also view the sensor information using the web browser and pointing it to port 5000 of the raspberry pi. https://PiHAT:5000
 
-To execute these scripts automatically... create .sh
+To execute these scripts automatically we need to update the bash scripts in the utils folder and make them executable
+
+First change directories to the utils folder and update the bash scripts to point to your python scripts
+
+    cd utils
+    nano launch_weather.sh
+    nano launch_web_app.sh
+    
+Then make them executable
+    
+    sudo chmod +x launch_weather.sh
+    sudo chmod +x launch_web_app.sh
+    
+Test the files
+
+    ./launch_weather.sh
+    ./launch_web_app.sh
+    
+Lastly add them to cron
+
+    sudo crontab -e
+    @reboot /home/pi/Pi_Weather_Station/utils/launch_weather.sh
+    @reboot /home/pi/Pi_Weather_Station/utils/launch_web_app.sh
+    
+ctrl+x to exit and y to save
+
+    sudo reboot -h now
+    
+Your raspberry pi should reboot and execute both scripts on startup
 
 These scripts are based off my this original project - https://github.com/llamafarmer/Pi/blob/master/MWS.py
 
@@ -42,5 +71,3 @@ improve web interface (buttons/user input)
 Allow user to create email alerts
 
 Screenshots
-
-Quick Start - Create .sh file to launch .py scripts
