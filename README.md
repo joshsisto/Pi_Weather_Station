@@ -15,14 +15,14 @@ On your raspberry pi with sense HAT run the command lines below
 
 Next you will need to install the packages needed for the scripts to execute
 
-    `sudo apt-get install python3-flask`
-    `sudo apt-get install sense-hat`
+    sudo apt-get install python3-flask
+    sudo apt-get install sense-hat
 
 You then need to change directories to the newly downloaded repository and start the python scripts
 
-    `cd Pi_Weather_Station`
-    `python3 weather.py`
-    `python3 web_app.py`
+    cd Pi_Weather_Station
+    python3 weather.py
+    python3 web_app.py
 
 The 8x8 LED matrix should light up and begin scrolling sensor information. You can also view the sensor information using the web browser and pointing it to port 5000 of the raspberry pi. https://PiHAT:5000
 
