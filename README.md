@@ -1,5 +1,5 @@
 ## Pi_Weather_Station: Weather Station Using Raspberry Pi and Sense HAT
-Python 3.4.2 - flask 0.10.1 - sense_hat 2.2.0
+Python 3.4.2 | flask 0.10.1 | sense_hat 2.2.0
 ### Description
 These scripts use a 
 [Raspberry Pi](http://amzn.to/2yB8HcM) with a 
