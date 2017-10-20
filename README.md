@@ -9,9 +9,9 @@ to monitor temperature, humidity, pressure, and orientation. The sensor informat
 ### Getting Started
 On your raspberry pi with sense HAT run the command lines below
 
-    `sudo apt-get update`
-    `sudo apt-get upgrade`
-    `git clone https://github.com/llamafarmer/Pi_Weather_Station.git`
+    sudo apt-get update
+    sudo apt-get upgrade
+    git clone https://github.com/llamafarmer/Pi_Weather_Station.git
 
 Next you will need to install the packages needed for the scripts to execute
 
