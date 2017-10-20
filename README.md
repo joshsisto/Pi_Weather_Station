@@ -2,7 +2,7 @@
 
 ### Description
 These scripts use a 
-[raspberry pi](http://amzn.to/2yB8HcM) with a 
+[Raspberry Pi](http://amzn.to/2yB8HcM) with a 
 [Sense HAT](http://amzn.to/2xS8PFX) 
 to monitor temperature, humidity, pressure, and orientation. It displays the data taken by the sense HAT sensors and prints them to the sense HAT 8x8 LED matrix and makes the data available via the web browser using Flask. It also logs the data to a .csv file.
 
