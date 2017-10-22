@@ -58,7 +58,7 @@ Lastly add them to cron
     @reboot /home/pi/Pi_Weather_Station/utils/launch_weather.sh
     @reboot /home/pi/Pi_Weather_Station/utils/launch_web_app.sh
     
-ctrl+x to exit and y to save
+ctrl+x to exit and y to save. Then enter the command below to reboot
 
     sudo reboot -h now
     
