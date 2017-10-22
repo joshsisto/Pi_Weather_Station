@@ -64,15 +64,8 @@ ctrl+x to exit and y to save. Then enter the command below to reboot
     
 Your raspberry pi should reboot and execute both scripts on startup
 
-These scripts are based off my this original project - https://github.com/llamafarmer/Pi/blob/master/MWS.py
-
-Links/sources: https://github.com/kronebone/Cold-Room, https://thepi.io/how-to-set-up-a-raspberry-pi-weather-station-using-the-sense-hat/, https://veekaybee.github.io/2017/09/26/python-packaging/
-
 ### todo
-add joystick functionality
-
-add video ([Pi Camera](http://amzn.to/2xSoF3w))
-
-improve web interface (buttons/user input)
-
-Allow user to create email alerts
++ add joystick functionality
++ add video ([Pi Camera](http://amzn.to/2xSoF3w))
++ improve web interface (buttons/user input)
++ Allow user to create email alerts
