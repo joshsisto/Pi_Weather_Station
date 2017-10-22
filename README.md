@@ -76,5 +76,3 @@ add video ([Pi Camera](http://amzn.to/2xSoF3w))
 improve web interface (buttons/user input)
 
 Allow user to create email alerts
-
-Screenshots
