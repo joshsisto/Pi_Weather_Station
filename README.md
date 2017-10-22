@@ -1,5 +1,6 @@
 ## Pi_Weather_Station: Weather Station Using Raspberry Pi and Sense HAT
 Python 3.4.2 | flask 0.10.1 | sense_hat 2.2.0
+
 <img src="IMG_0705.jpg" alt="Pi with HAT" style="width: 200px;"/>
 ### Description
 These scripts use a 
@@ -26,7 +27,11 @@ You then need to change directories to the newly downloaded repository and start
     python3 weather.py
     python3 web_app.py
 
-The 8x8 LED matrix should light up and begin scrolling sensor information. You can also view the sensor information using the web browser and pointing it to port 5000 of the raspberry pi. https://PiHAT:5000
+The 8x8 LED matrix should light up and begin scrolling sensor information. You can also view the sensor information using the web browser and pointing it to port 5000 of the raspberry pi.
+
+<img src="animated.gif" alt="Pi HAT LED" style="width: 200px;"/>
+
+<img src="Pi_Web.PNG" alt="Web Screenshot" style="width: 200px;"/>
 
 To execute these scripts automatically we need to update the bash scripts in the utils folder and make them executable
 
