@@ -71,4 +71,4 @@ Your raspberry pi should reboot and execute both scripts on startup
 + Allow user to create email alerts
 
 ## Copyright and License
-Copyright (c) 2017 Josh Sisto ['MIT License'](/LICENSE)
+Copyright (c) 2017 Josh Sisto [MIT License](/LICENSE)
