@@ -65,7 +65,7 @@ ctrl+x to exit and y to save. Then enter the command below to reboot
 Your raspberry pi should reboot and execute both scripts on startup
 
 ### todo
-+ ~~add joystick functionality~~
++ ~~add joystick functionality~~ thanks @atbPy
 + ~~add video ([Pi Camera](http://amzn.to/2xSoF3w))~~ see [`Hummingbird_Watcher`](https://github.com/llamafarmer/Hummingbird_Watcher)
 + improve web interface (buttons/user input)
 + Allow user to create email alerts
