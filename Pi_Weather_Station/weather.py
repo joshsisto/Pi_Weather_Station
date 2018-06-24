@@ -3,6 +3,14 @@ import csv
 from math import log
 from sense_hat import SenseHat
 
+RED = [155, 0, 0]
+BRED = [255, 0, 0]
+ORANGE = [255, 127, 0]
+YELLOW = [155, 155, 0]
+GREEN = [0, 155, 0]
+BLUE = [0, 0, 155]
+WHITE = [155, 155, 155]
+
 def weather():
     sense = SenseHat()
     sense.clear()
@@ -18,22 +26,22 @@ def weather():
     y = round(acceleration['y'], 2)
     z = round(acceleration['z'], 2)
     # Set screen color based on temperature
-    if fahrenheit > 20 and fahrenheit < 80:
-        bg_color = [0, 0, 155]  # blue
-    elif fahrenheit > 81 and fahrenheit < 90:
-        bg_color = [0, 155, 0]  # Green
-    elif fahrenheit > 91 and fahrenheit < 100:
-        bg_color = [155, 155, 0]  # Yellow
-    elif fahrenheit > 101 and fahrenheit < 102:
-        bg_color = [255, 127, 0]  # Orange
-    elif fahrenheit > 103 and fahrenheit < 104:
-        bg_color = [155, 0, 0]  # Red
-    elif fahrenheit > 105 and fahrenheit < 109:
-        bg_color = [255, 0, 0]  # Bright Red
-    elif fahrenheit > 110 and fahrenheit < 120:
-        bg_color = [155, 155, 155]  # White
+    if 20 <= fahrenheit <= 80:
+        bg_color = BLUE
+    elif 81 <= fahrenheit <= 90:
+        bg_color = GREEN
+    elif 91 <= fahrenheit <= 100:
+        bg_color = YELLOW
+    elif 101 <= fahrenheit <= 102:
+        bg_color = ORANGE
+    elif 103 <= fahrenheit <= 104:
+        bg_color = RED
+    elif 105 <= fahrenheit <= 109:
+        bg_color = BRED
+    elif 110 <= fahrenheit <= 120:
+        bg_color = WHITE
     else:
-        bg_color = [0, 155, 0]  # Green
+        bg_color = GREEN
 
     result = ' Temp. F ' + str(fahrenheit) + ' Temp. C ' + str(celcius) + ' Hum. ' + str(humidity) + ' Press. ' + str(pressure) + ' DewPoint ' + str(dewpoint)
     print(result)
@@ -43,7 +51,7 @@ def weather():
         writer = csv.writer(csv_file)
         writer.writerows(result_list)
     # Print the data logged 5 times
-    for x in range(5):
+    for _ in range(5):
         # set orientation
         acceleration = sense.get_accelerometer_raw()
         x = round(acceleration['x'], 0)
@@ -57,7 +65,8 @@ def weather():
         else:
             sense.set_rotation(180)
         # print result variable to the PiHAT screen
-        sense.show_message(result, scroll_speed=0.10, back_colour=bg_color, text_colour=[155, 155, 155])
+        sense.show_message(result, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
 
 while __name__ == '__main__':
     weather()
+
