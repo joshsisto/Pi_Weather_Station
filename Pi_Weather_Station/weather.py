@@ -5,8 +5,6 @@ from math import log
 from sense_hat import SenseHat
 
 sense = SenseHat()
-ts = time.time()
-st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
 RED = [155, 0, 0]
 BRED = [255, 0, 0]
@@ -15,6 +13,11 @@ YELLOW = [155, 155, 0]
 GREEN = [0, 155, 0]
 BLUE = [0, 0, 155]
 WHITE = [155, 155, 155]
+
+def get_timestamp():
+    ts = time.time()
+    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    return st
 
 def get_sensor_data():
     """Get sensor data from SenseHAT"""
@@ -76,7 +79,7 @@ def set_screen_color(fahrenheit):
 
 
 def log_sensor_data(result_list):
-    result_list.insert(0, st)
+    result_list.insert(0, get_timestamp())
     xyz = get_xyz()
     for coordinate in xyz:
         result_list.append(coordinate)
