@@ -1,7 +1,12 @@
 import datetime
+import time
 import csv
 from math import log
 from sense_hat import SenseHat
+
+sense = SenseHat()
+ts = time.time()
+st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
 RED = [155, 0, 0]
 BRED = [255, 0, 0]
@@ -11,21 +16,46 @@ GREEN = [0, 155, 0]
 BLUE = [0, 0, 155]
 WHITE = [155, 155, 155]
 
-def weather():
+def get_sensor_data():
+    """Get sensor data from SenseHAT"""
     sense = SenseHat()
     sense.clear()
-    # Get temperature, humidity, pressure, and calculate dewpoint
-    celcius = round(sense.get_temperature(), 1)
-    fahrenheit = round(1.8 * celcius + 32, 1)
+    celsius = round(sense.get_temperature(), 1)
+    fahrenheit = round(1.8 * celsius + 32, 1)
     humidity = round(sense.get_humidity(), 1)
     pressure = round(sense.get_pressure(), 1)
-    dewpoint = round(243.04 * (log(humidity / 100) + ((17.625 * celcius) / (243.04 + celcius))) / (17.625 - log(humidity / 100) - (17.625 * celcius) / (243.04 + celcius)), 1)
-    # Get orientation data
+    dewpoint = (round(243.04 * (log(humidity / 100)
+                + ((17.625 * celsius) / (243.04 + celsius))) / (17.625 - log(humidity / 100)
+                                                                - (17.625 * celsius) / (243.04 + celsius)), 1))
+    return [celsius, fahrenheit, humidity, pressure, dewpoint]
+
+def get_xyz():
+    """Get orientation data X,Y,Z"""
+    sense.clear()
     acceleration = sense.get_accelerometer_raw()
     x = round(acceleration['x'], 2)
     y = round(acceleration['y'], 2)
     z = round(acceleration['z'], 2)
-    # Set screen color based on temperature
+    return [x, y, z]
+
+def set_orientation():
+    """Set screen orientation based on x,y sensor reading"""
+    sense.clear()
+    acceleration = sense.get_accelerometer_raw()
+    x = round(acceleration['x'], 0)
+    y = round(acceleration['y'], 0)
+    if x == -1:
+        sense.set_rotation(90)
+    elif y == 1:
+        sense.set_rotation(0)
+    elif y == -1:
+        sense.set_rotation(180)
+    else:
+        sense.set_rotation(180)
+
+
+def set_screen_color(fahrenheit):
+    """Set screen color based on temperature"""
     if 20 <= fahrenheit <= 80:
         bg_color = BLUE
     elif 81 <= fahrenheit <= 90:
@@ -42,30 +72,32 @@ def weather():
         bg_color = WHITE
     else:
         bg_color = GREEN
+    return bg_color
 
-    result = ' Temp. F ' + str(fahrenheit) + ' Temp. C ' + str(celcius) + ' Hum. ' + str(humidity) + ' Press. ' + str(pressure) + ' DewPoint ' + str(dewpoint)
-    print(result)
-    result_list = [(datetime.datetime.now(), celcius, fahrenheit, humidity, pressure, dewpoint, x, y, z)]
-    # Log input
+
+def log_sensor_data(result_list):
+    result_list.insert(0, st)
+    xyz = get_xyz()
+    for coordinate in xyz:
+        result_list.append(coordinate)
     with open('weather_logs.csv', 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
-        writer.writerows(result_list)
-    # Print the data logged 5 times
+        writer.writerow(result_list)
+
+
+def weather():
+    """Display SenseHAT data on the 8x8 LED grid"""
+    log_sensor_data(get_sensor_data())
+    # Display data 5 times before logging it again
     for _ in range(5):
-        # set orientation
-        acceleration = sense.get_accelerometer_raw()
-        x = round(acceleration['x'], 0)
-        y = round(acceleration['y'], 0)
-        if x == -1:
-            sense.set_rotation(90)
-        elif y == 1:
-            sense.set_rotation(0)
-        elif y == -1:
-            sense.set_rotation(180)
-        else:
-            sense.set_rotation(180)
-        # print result variable to the PiHAT screen
-        sense.show_message(result, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
+        data_lst = get_sensor_data()
+        sense_data = ("Temp. F {} Temp. C {} Hum. {} Press. {} DewPoint {}"
+                      .format(data_lst[1], data_lst[0], data_lst[2], data_lst[3], data_lst[4]))
+        print(sense_data)
+        set_orientation()
+        bg_color = set_screen_color(data_lst[1])
+        sense.show_message(sense_data, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
+
 
 while __name__ == '__main__':
     weather()
