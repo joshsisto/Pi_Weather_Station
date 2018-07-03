@@ -2,4 +2,4 @@
 
 export PYTHONPATH=/usr/local/lib/python3/dist-packages:$PYTHONPATH
 
-python3 /home/pi/Pi_Weather_Station/shutdown_options.py
+python3 /home/pi/Pi_Weather_Station/src/shutdown_options.py
