@@ -4,8 +4,8 @@ from sense_hat import SenseHat
 
 app = Flask(__name__)
 
-@app.route('/')
 
+@app.route('/')
 def index():
     sense = SenseHat()
     sense.clear()
@@ -22,6 +22,7 @@ def index():
         z = round(acceleration['z'], 2),
     )
     return render_template('weather.html', **kwargs)
+
 
 while __name__ == '__main__':
     app.run(host='0.0.0.0')
