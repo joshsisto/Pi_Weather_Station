@@ -14,10 +14,12 @@ GREEN = [0, 155, 0]
 BLUE = [0, 0, 155]
 WHITE = [155, 155, 155]
 
+
 def get_timestamp():
     ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     return st
+
 
 def get_sensor_data():
     """Get sensor data from SenseHAT"""
@@ -32,6 +34,7 @@ def get_sensor_data():
                                                                 - (17.625 * celsius) / (243.04 + celsius)), 1))
     return [celsius, fahrenheit, humidity, pressure, dewpoint]
 
+
 def get_xyz():
     """Get orientation data X,Y,Z"""
     sense.clear()
@@ -40,6 +43,7 @@ def get_xyz():
     y = round(acceleration['y'], 2)
     z = round(acceleration['z'], 2)
     return [x, y, z]
+
 
 def set_orientation():
     """Set screen orientation based on x,y sensor reading"""
