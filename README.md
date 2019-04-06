@@ -9,7 +9,7 @@ These scripts use a
 [Sense HAT](http://amzn.to/2xS8PFX)
 to monitor temperature, humidity, pressure, and orientation. The sensor
 information is displayed on the sense HAT 8x8 LED matrix, and via the web
-browser using [flask.](http://flask.pocoo.org/)
+browser using [flask](http://flask.pocoo.org/).
 
 ### Getting Started
 On your raspberry pi with sense HAT run the command lines below

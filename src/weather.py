@@ -84,13 +84,15 @@ def set_screen_color(fahrenheit):
 
 
 def log_sensor_data(result_list):
-    cwd = os.getcwd()
-    weather_log = os.path.join(cwd, 'weather_logs.csv')
+    os.getcwd()
+    os.chdir('..')
+    os.chdir('src')
+    # weather_log = os.path.join(src_dir, 'weather_logs.csv')
     result_list.insert(0, get_timestamp())
     xyz = get_xyz()
     for coordinate in xyz:
         result_list.append(coordinate)
-    with open(weather_log, 'a', newline='') as csv_file:
+    with open('weather_logs.csv', 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(result_list)
 
