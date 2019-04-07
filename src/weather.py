@@ -1,6 +1,7 @@
 import datetime
 import time
 import csv
+import os
 from math import log
 from sense_hat import SenseHat
 
@@ -83,11 +84,13 @@ def set_screen_color(fahrenheit):
 
 
 def log_sensor_data(result_list):
+    src_dir = os.path.dirname(os.path.realpath(__file__))
+    w_log = os.path.join(src_dir, 'weather_logs.csv')
     result_list.insert(0, get_timestamp())
     xyz = get_xyz()
     for coordinate in xyz:
         result_list.append(coordinate)
-    with open('../src/weather_logs.csv', 'a', newline='') as csv_file:
+    with open(w_log, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(result_list)
 
