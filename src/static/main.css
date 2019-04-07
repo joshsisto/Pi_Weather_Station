@@ -111,7 +111,7 @@ body {
 .header {
     padding: 60px;
     margin-bottom: 12px;
-    background-image: url("https://www.raspberrypi.org/wp-content/uploads/2011/10/Raspi-PGB001.png");
+    background-image: url("Raspi-PGB001.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
