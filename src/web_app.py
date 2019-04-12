@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from sendEmail import *
+from flask import Flask, request, render_template
+from sendEmail import send_email
 from sense_hat import SenseHat
 
 app = Flask(__name__)
@@ -24,5 +24,14 @@ def index():
     return render_template('weather.html', **kwargs)
 
 
+@app.route('/alerts/', methods=['POST', 'GET'])
+def alerts():
+    if request.method == 'POST':
+        e_subject = request.form['subject']
+        e_message = request.form['message']
+        send_email(e_subject, e_message)
+    return render_template('alerts.html')
+
+
 while __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)

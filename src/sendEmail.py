@@ -3,7 +3,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-def sendEmail(subject, message_body):
+def send_email(subject, message_body):
     fromaddr = "Pi_Weather_Station@joshsisto.com"  # from email address
     toaddr = "joshsisto@gmail.com"  # destination email address
     smtp_user = ""  # SMTP username used for authentication

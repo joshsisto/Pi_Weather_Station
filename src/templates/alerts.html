@@ -10,13 +10,13 @@
 
    <body>
         <div class="header"></div>
-        <h1>Alerts</h1>
 
-        <form method="POST">
-        <input name="text">
-        <input type="submit">
+        <form action='/alerts/' method='POST'>
+            Subject <p><input type="text" name="subject" required="" /></p>
+            Message <p><input type="text" name="message" required="" /></p>
+            <input type="submit" name="submit" value="alerts">
         </form>
-		
+
     </body>
     <footer>
         <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a></p>
