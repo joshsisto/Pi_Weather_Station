@@ -1,6 +1,7 @@
-from flask import Flask, render_template
-from sendEmail import *
+from flask import Flask, request, render_template
+from sendEmail import send_email
 from sense_hat import SenseHat
+import os
 
 app = Flask(__name__)
 
@@ -24,5 +25,22 @@ def index():
     return render_template('weather.html', **kwargs)
 
 
+@app.route('/alerts/', methods=['POST', 'GET'])
+def alerts():
+    if request.method == 'POST':
+        e_subject = request.form['subject']
+        e_message = request.form['message']
+        send_email(e_subject, e_message)
+    return render_template('alerts.html')
+
+
+@app.route('/logs/')
+def logs_web():
+    csv_path = os.path.join(os.path.dirname(__file__), 'weather_logs.csv')
+    with open(csv_path, 'r') as f:
+        content = f.read()
+    return render_template('logs.html', content=content)
+
+
 while __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
