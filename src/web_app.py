@@ -3,6 +3,7 @@ from sendEmail import send_email
 from sense_hat import SenseHat
 import os
 
+
 app = Flask(__name__)
 
 
