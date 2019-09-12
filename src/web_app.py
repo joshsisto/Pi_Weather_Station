@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 from sendEmail import send_email
+from weather import get_timestamp
 from sense_hat import SenseHat
 import os
 
@@ -37,7 +38,8 @@ def alerts():
 
 @app.route('/logs/')
 def logs_web():
-    csv_path = os.path.join(os.path.dirname(__file__), 'weather_logs.csv')
+    day = get_timestamp().split()[0]
+    csv_path = os.path.join(os.path.dirname(__file__), day + '.csv')
     with open(csv_path, 'r') as f:
         content = f.read()
     return render_template('logs.html', content=content)
