@@ -117,4 +117,5 @@ while __name__ == '__main__':
     except KeyboardInterrupt:
         # Clear the sense hat when manually interrupted
         sense.clear()
+        exit()
 
