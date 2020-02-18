@@ -24,4 +24,4 @@ while True:
         # General handling for debugging
         print("The joystick was {} {}".format(event.action, event.direction))
 
-    sleep(0.1)
+    sleep(1)

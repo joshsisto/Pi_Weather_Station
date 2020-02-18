@@ -1,5 +1,7 @@
 import datetime
 import time
+import json
+import requests
 import csv
 import os
 from math import log
@@ -83,34 +85,65 @@ def set_screen_color(fahrenheit):
     return bg_color
 
 
-def log_sensor_data(result_list):
-    """Log sensor data"""
-    day = get_timestamp().split()[0]
-    src_dir = os.path.dirname(os.path.realpath(__file__))
-    w_log = os.path.join(src_dir, day + '.csv')
-    result_list.insert(0, get_timestamp())
-    xyz = get_xyz()
-    for coordinate in xyz:
-        result_list.append(coordinate)
-    with open(w_log, 'a', newline='') as csv_file:
-        writer = csv.writer(csv_file)
-        writer.writerow(result_list)
-
-
 def weather():
     """Display SenseHAT data on the 8x8 LED grid"""
-    log_sensor_data(get_sensor_data())
-    # Display data 5 times before logging it again
-    for _ in range(5):
-        data_lst = get_sensor_data()
-        sense_data = ("Temp. F {} Temp. C {} Hum. {} Press. {} DewPoint {}"
-                      .format(data_lst[1], data_lst[0], data_lst[2], data_lst[3], data_lst[4]))
-        print(sense_data)
-        set_orientation()
-        bg_color = set_screen_color(data_lst[1])
-        sense.show_message(sense_data, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
+    data_lst = get_sensor_data()
+    sense_data = ("Temp. F {} Temp. C {} Hum. {} Press. {} DewPoint {}"
+                    .format(data_lst[1], data_lst[0], data_lst[2], data_lst[3], data_lst[4]))
+    print(sense_data)
+    set_orientation()
+    bg_color = set_screen_color(data_lst[1])
+    sense.show_message(sense_data, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
 
 
-while __name__ == '__main__':
-    weather()
+
+# def get_csv_data():
+#     day = get_timestamp().split()[0]
+#     csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
+#     with open(csv_path, 'r') as f:
+#         # content = f.read()
+#         reader = csv.reader(f)
+#         for row in reader:
+#             print(row)      
+#     return row[0]
+
+# # print(get_csv_data())
+
+# csv_content = get_csv_data()
+# print()
+# print()
+# print()
+# print(csv_content[0])
+# # print(csv_content)
+
+day = get_timestamp().split()[0]
+csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
+
+def readMyFile(filename):
+    dates = []
+    with open(filename) as csvDataFile:
+        csvReader = csv.reader(csvDataFile)
+        for row in csvReader:
+            dates.append(row)
+    return dates
+
+
+weather_stats = readMyFile(csv_path)
+
+# print(weather_stats[-1])
+
+current_stat = weather_stats[-1]
+current_aqi = current_stat[10]
+current_aqi_num = current_aqi[0]
+
+print(current_stat[9])
+print(current_aqi)
+print(type(current_aqi))
+print(current_aqi_num)
+
+# print(scores)
+
+
+# while __name__ == '__main__':
+    # weather()
 

@@ -39,7 +39,7 @@ def alerts():
 @app.route('/logs/')
 def logs_web():
     day = get_timestamp().split()[0]
-    csv_path = os.path.join(os.path.dirname(__file__), day + '.csv')
+    csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
     with open(csv_path, 'r') as f:
         content = f.read()
     return render_template('logs.html', content=content)

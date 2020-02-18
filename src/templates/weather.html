@@ -1,31 +1,44 @@
 <!doctype html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="author" content="Josh Sisto">
-        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-        <title>Raspberry Pi Weather Station</title>
-    </head>
 
-   <body>
-        <div class="header"></div>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Josh Sisto">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>Raspberry Pi Weather Station</title>
+</head>
+
+<body>
+    <!-- <header>Raspberry Pi Weather Station</header> -->
+    <div class="container">
         <h1>Raspberry Pi Weather Station</h1>
+        <h3>Sacramento California USA 🇺🇸</h3>
+        <h3><p><a href="alerts">Alerts</a> <a href="logs">Logs</a></p></h2>
+    </div>
+    <h2 class="center">Raspberry Pi Sensor Readings</h2>
+    <div class="container">
+        <div>
+            <h2 class="bg-gray">Temperature</h2>
+            <p><strong>Celsius:</strong> {{ celsius }}</p>
+            <p><strong>Fahrenheit:</strong> {{ fahrenheit }}</p>
+        </div>
+        <div>
+            <h2 class="bg-gray">Humidity and Pressure</h2>
+            <p><strong>Humidity:</strong> {{ humidity }}</p>
+            <p><strong>Pressure:</strong> {{ pressure }}</p>
+        </div>
+        <div>
+            <h2 class="bg-gray">Orientation</h2>
+            <p><strong>X:</strong> {{ x }} <strong>Y:</strong> {{ y }} <strong>Z:</strong> {{ z }}</p>
+        </div>
+    </div>
 
-        <h2>Temperature</h2>
-        <p><strong>Celsius:</strong> {{ celsius }}</p>
-        <p><strong>Fahrenheit:</strong> {{ fahrenheit }}</p>
-		<h2>Humidity and Pressure</h2>
-		<p><strong>Humidity:</strong> {{ humidity }}</p>
-		<p><strong>Pressure:</strong> {{ pressure }}</p>
-		<h2>Orientation</h2>
-		<p><strong>X:</strong> {{ x }} <strong>Y:</strong> {{ y }} <strong>Z:</strong> {{ z }}</p>
+    
 
-        <p><a href="alerts">Alerts</a> <a href="logs">Logs</a> </p>
-		
-    </body>
-    <footer>
-        <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a></p>
-        <p>&copy; Josh Sisto</p>
+    <footer class="center">
+        <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a> &copy; Josh Sisto</p>
     </footer>
+</body>
+
 </html>
