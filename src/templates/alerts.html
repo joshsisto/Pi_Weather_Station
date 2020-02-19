@@ -1,27 +1,53 @@
 <!doctype html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="author" content="Josh Sisto">
-        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-        <title>Raspberry Pi Weather Station</title>
-    </head>
 
-   <body>
-        <div class="header"></div>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Josh Sisto">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <title>Raspberry Pi Weather Station</title>
+</head>
 
+<body>
+    <header>Sacramento California USA 🇺🇸</header>
+    <nav>
         <p><a href="/">Weather</a></p>
+    </nav>
 
-        <form action='/alerts/' method='POST'>
-            Subject <p><input type="text" name="subject" required="" /></p>
-            Message <p><input type="text" name="message" required="" /></p>
-            <input type="submit" name="submit" value="alerts">
-        </form>
+    <h1>Set Alerts</h1>
+    <form action="/alerts/" method="POST">
+        <fieldset>
+            <div class="double-input">
+                <div>
+                    <label for="min_temp">Min Temp</label><br />
+                    <input type="number" name="mintemp" id="min_temp" />
+                </div>
+                <div>
+                    <label for="max_temp">Max Temp</label><br />
+                    <input type="number" name="maxtemp" id="max_temp" />
+                </div>
+            </div>
+            <div class="single-input">
+                <div>
+                    <label for="aqi_max">Max AQI</label><br />
+                    <input type="number" name="aqimax" id="aqi_max" placeholder="0 - 50 = Good" />
+                </div>
+            </div>
+            <button type="submit">Submit</button>            
+        </fieldset>
 
-    </body>
-    <footer>
+    </form>
+
+    <!-- <form action='/alerts/' method='POST'>
+        Subject <p><input type="text" name="subject" required="" /></p>
+        Message <p><input type="text" name="message" required="" /></p>
+        <input type="submit" name="submit" value="alerts">
+    </form> -->
+
+    <footer class="center">
         <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a></p>
-        <p>&copy; Josh Sisto</p>
     </footer>
+</body>
+
 </html>

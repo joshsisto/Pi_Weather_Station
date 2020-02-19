@@ -96,54 +96,6 @@ def weather():
     sense.show_message(sense_data, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
 
 
-
-# def get_csv_data():
-#     day = get_timestamp().split()[0]
-#     csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
-#     with open(csv_path, 'r') as f:
-#         # content = f.read()
-#         reader = csv.reader(f)
-#         for row in reader:
-#             print(row)      
-#     return row[0]
-
-# # print(get_csv_data())
-
-# csv_content = get_csv_data()
-# print()
-# print()
-# print()
-# print(csv_content[0])
-# # print(csv_content)
-
-day = get_timestamp().split()[0]
-csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
-
-def readMyFile(filename):
-    dates = []
-    with open(filename) as csvDataFile:
-        csvReader = csv.reader(csvDataFile)
-        for row in csvReader:
-            dates.append(row)
-    return dates
-
-
-weather_stats = readMyFile(csv_path)
-
-# print(weather_stats[-1])
-
-current_stat = weather_stats[-1]
-current_aqi = current_stat[10]
-current_aqi_num = current_aqi[0]
-
-print(current_stat[9])
-print(current_aqi)
-print(type(current_aqi))
-print(current_aqi_num)
-
-# print(scores)
-
-
 # while __name__ == '__main__':
-    # weather()
+    weather()
 

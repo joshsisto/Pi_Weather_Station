@@ -1,4 +1,9 @@
 
+nav.container {
+    /* margin: 15px; */
+    /* padding: 15px; */
+}
+
 .bg-gray {
     background-color: gray;
 }
@@ -6,14 +11,131 @@
 .container {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    padding: 20px;
-    margin: 10px;
+    /* padding: 20px; */
+    /* margin: 20px; */
 }
 
-.container a {
-    font-weight: bold;
+nav a, a:visited, a:link, a:active {
+    text-decoration: none;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .center {
     text-align: center;
+}
+
+
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    /* vertical-align: middle; */
+}
+
+header {
+    /* align-content: right; */
+    text-align: right;
+}
+
+
+/* ################ */
+/* For Alerts pages */
+/* ################ */
+
+fieldset {
+    border: 0;
+    padding: 0;
+}
+
+fieldset>div {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+label span {
+    color: red;
+}
+
+input,
+select {
+    border: 1px solid grey;
+    padding: 10px;
+    width: 200px;
+}
+
+select {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    color: #666;
+    -webkit-appearance: none;
+    width: 100%;
+}
+
+.select-wrapper {
+    position: relative;
+    width: 222px;
+}
+
+.select-wrapper:after {
+    content: "<>";
+    color: #666;
+    font-size: 14px;
+    top: 8px;
+    right: 0;
+    transform: rotate(90deg);
+    position: absolute;
+    z-index: -1;
+}
+
+.single-input input {
+    width: 439px;
+}
+
+.double-input {
+    display: flex;
+}
+
+.double-input>div {
+    margin-right: 15px;
+}
+
+.checkbox input {
+    float: left;
+    width: auto;
+    margin-right: 10px;
+}
+
+button {
+    background: green;
+    border: 0;
+    color: white;
+    width: 224px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+input:valid,
+textarea:valid {
+    border-bottom-color: green;
+}
+
+input:invalid,
+textarea:invalid {
+    border-bottom-color: red;
 }

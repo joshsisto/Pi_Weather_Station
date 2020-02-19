@@ -10,31 +10,43 @@
 </head>
 
 <body>
-    <!-- <header>Raspberry Pi Weather Station</header> -->
-    <div class="container">
-        <h1>Raspberry Pi Weather Station</h1>
-        <h3>Sacramento California USA 🇺🇸</h3>
-        <h3><p><a href="alerts">Alerts</a> <a href="logs">Logs</a></p></h2>
-    </div>
+    <header>Sacramento California USA 🇺🇸</header>
+    <nav class="container">
+        <h3><a href="alerts">Alerts</a> <a href="logs">Logs</a></h3>
+        <h3>Raspberry Pi Powered Weather Station</h3>
+    </nav>
     <h2 class="center">Raspberry Pi Sensor Readings</h2>
     <div class="container">
         <div>
-            <h2 class="bg-gray">Temperature</h2>
+            <h3 class="bg-gray">Temperature</h3>
             <p><strong>Celsius:</strong> {{ celsius }}</p>
             <p><strong>Fahrenheit:</strong> {{ fahrenheit }}</p>
         </div>
         <div>
-            <h2 class="bg-gray">Humidity and Pressure</h2>
+            <h3 class="bg-gray">Humid. & Press.</h3>
             <p><strong>Humidity:</strong> {{ humidity }}</p>
             <p><strong>Pressure:</strong> {{ pressure }}</p>
         </div>
         <div>
-            <h2 class="bg-gray">Orientation</h2>
+            <h3 class="bg-gray">Orientation</h3>
             <p><strong>X:</strong> {{ x }} <strong>Y:</strong> {{ y }} <strong>Z:</strong> {{ z }}</p>
         </div>
     </div>
 
-    
+    <h2 class="center">Weather and Air Quality</h2>
+    <div class="container">
+        <div>
+            <h3 class="bg-gray">Weather Provided By darksky.net</h3>
+            <p>Temp: {{ dark_sky[0] }} </p>
+            <p>Current Conditions: {{ dark_sky[1] }} </p>
+            <p>Forecast: {{ dark_sky[2] }} </p>
+        </div>
+        <div>
+            <h3 class="bg-gray">Air Quality Index</h3>
+            <p>AQI: {{ aqi[0] }} </p>
+            <p>Status: {{ aqi[1] }} </p>
+        </div>
+    </div>
 
     <footer class="center">
         <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a> &copy; Josh Sisto</p>
