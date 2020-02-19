@@ -20,17 +20,20 @@
         <fieldset>
             <div class="double-input">
                 <div>
-                    <label for="min_temp">Min Temp</label><br />
+                    <label for="min_temp">Min Temp</label>
+                    Current Alert Setting: {{ stat_dict['min_temp'] }}<br />
                     <input type="number" name="mintemp" id="min_temp" />
                 </div>
                 <div>
-                    <label for="max_temp">Max Temp</label><br />
+                    <label for="max_temp">Max Temp</label>
+                    Current Alert Setting: {{ stat_dict['max_temp'] }}<br />
                     <input type="number" name="maxtemp" id="max_temp" />
                 </div>
             </div>
             <div class="single-input">
                 <div>
-                    <label for="aqi_max">Max AQI</label><br />
+                    <label for="aqi_max">Max AQI</label>
+                    Current Alert Setting: {{ stat_dict['aqi_max'] }}<br />
                     <input type="number" name="aqimax" id="aqi_max" placeholder="0 - 50 = Good" />
                 </div>
             </div>
@@ -38,12 +41,6 @@
         </fieldset>
 
     </form>
-
-    <!-- <form action='/alerts/' method='POST'>
-        Subject <p><input type="text" name="subject" required="" /></p>
-        Message <p><input type="text" name="message" required="" /></p>
-        <input type="submit" name="submit" value="alerts">
-    </form> -->
 
     <footer class="center">
         <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a></p>
