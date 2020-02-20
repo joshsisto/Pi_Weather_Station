@@ -135,7 +135,4 @@ if check_min() == True:
 
 if check_air() == True:
     send_email('AQI max threshold crossed', ' 😷')
-    
-# check_min()
-# check_air()
 
