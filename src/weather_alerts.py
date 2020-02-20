@@ -7,6 +7,7 @@ import glob
 from math import log
 from sense_hat import SenseHat
 from weather import get_timestamp
+from sendEmail import *
 
 
 def get_csv_data():
@@ -35,7 +36,6 @@ def get_dark_sky():
     ds_fore = dark_sky_list[2].strip("'")
     return [ds_temp, ds_cond, ds_fore]
 
-# print(get_dark_sky())
 
 def get_gov_aqi():
     """Read the most recent aqi log and return the stats"""
@@ -47,17 +47,12 @@ def get_gov_aqi():
     air_cond = aqi_list[1].strip("'")
     return [aqi, air_cond]
 
-# print(get_gov_aqi())
-
 
 def get_timestamp():
     ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     return st
 
-# test_list = ['boom', 'bam', 0]
-
-test_dict = {'max' : '45', 'min' : '45', 'AQI' : 0}
 
 def save_alert(result_dict):
     """Take a list and save it as a csv"""
@@ -67,7 +62,6 @@ def save_alert(result_dict):
     with open(file_path, 'w') as output:
         output.write(str(result_dict))
 
-# save_alert(test_dict)
 
 def read_alert():
     file_path = '/home/pi/Pi_Weather_Station/src/alerts.txt'
@@ -76,7 +70,6 @@ def read_alert():
         whip = ast.literal_eval(s)
     return whip
 
-# print(read_alert())
 
 def check_max():
     try:    
@@ -94,11 +87,6 @@ def check_max():
     except:
         print('That did not work.')
         print('probably did not have a value set for maximum temp')
-
-
-# check_max()
-# if check_max() == True:
-#     print('truth')
 
 
 def check_min():
@@ -119,10 +107,6 @@ def check_min():
         print('probably did not have a value set for minimum temp')
 
 
-if check_min() == True:
-    print('truth')
-
-
 def check_air():
     try:
         alert_cont = read_alert()
@@ -141,4 +125,17 @@ def check_air():
         print('probably did not have a value set for aqi')
 
 
-check_air()
+if check_max() == True:
+    send_email('Max Temp Reached', 'Check https://pi.sisto.solutions')
+
+
+if check_min() == True:
+    send_email('Min Temp Reached', 'Check https://pi.sisto.solutions')
+
+
+if check_air() == True:
+    send_email('AQI max threshold crossed', ' 😷')
+    
+# check_min()
+# check_air()
+
