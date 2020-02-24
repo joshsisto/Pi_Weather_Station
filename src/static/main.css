@@ -30,17 +30,19 @@ a:hover {
 
 
 html, body {
-    height: 100%;
+    /* height: 100%; */
 }
 
 html {
     display: table;
     margin: auto;
+    /* width: 100%; */
 }
 
 body {
-    display: table-cell;
+    /* display: table-cell; */
     /* vertical-align: middle; */
+    width: 100%;
 }
 
 header {
@@ -138,4 +140,33 @@ textarea:valid {
 input:invalid,
 textarea:invalid {
     border-bottom-color: red;
+}
+
+.blue-text {
+    color: blue;
+}
+
+.red-text {
+    color: red;
+}
+
+.green-text {
+    color: green;
+}
+
+
+/* ############ */
+/* logs.html */
+/* ############ */
+
+.table {       
+    position: absolute;
+    font-size: 150%;
+    width: 480px;
+    height: 200px;
+    z-index: 15;
+    top: 20%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    background: rgb(236, 240, 204);
 }

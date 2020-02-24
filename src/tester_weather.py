@@ -7,6 +7,9 @@ import glob
 from math import log
 from sense_hat import SenseHat
 from weather import get_timestamp
+from sendEmail import *
+import tablib
+import pandas as pd
 
 
 def get_csv_data():
@@ -99,6 +102,7 @@ def check_max():
 # check_max()
 # if check_max() == True:
 #     print('truth')
+#     sendEmail('max temp exceeded', 'Pi max temp exceeded')
 
 
 def check_min():
@@ -119,8 +123,8 @@ def check_min():
         print('probably did not have a value set for minimum temp')
 
 
-if check_min() == True:
-    print('truth')
+# if check_min() == True:
+#     print('truth')
 
 
 def check_air():
@@ -141,4 +145,30 @@ def check_air():
         print('probably did not have a value set for aqi')
 
 
-check_air()
+# check_air()
+
+
+# # csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
+# csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
+# with open(csv_path, 'r') as fh:
+#     imported_data = tablib.Dataset().load(fh)
+#     imported_data.headers = ['Log Time', 'Temp (C)', 'Temp (F)', 'Humidity', 'Pressure', 'DewPoint', 'X', 'Y', 'Z', 'Weather', 'AQI']
+#     print(type(imported_data))
+# data = imported_data.export('csv')
+
+# print(type(data))
+# print(data)
+
+def update_logs_html():        
+    day = get_timestamp().split()[0]
+    csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
+    columns = ['Log Time', 'Temp (C)', 'Temp (F)', 'Humidity', 'Pressure', 'DewPoint', 'X', 'Y', 'Z', 'Weather', 'AQI']
+    df = pd.read_csv(csv_path, names=columns)
+    with open('/home/pi/Pi_Weather_Station/src/templates/logs.html', 'w') as html_file:
+        html_file.write(df.to_html())
+
+# print(df.to_html())
+
+# update_logs_html()
+
+# send_email('mailjet fix', 'mailjet has updated credentials')

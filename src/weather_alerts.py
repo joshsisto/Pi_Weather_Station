@@ -14,8 +14,8 @@ def get_csv_data():
     """Open the daily csv log and return the content"""
     csv_list = []
     day = get_timestamp().split()[0]
-    # csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
-    csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
+    csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
+    # csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
     with open(csv_path, 'r') as csv_file:
         # content = f.read()
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -46,21 +46,6 @@ def get_gov_aqi():
     aqi = aqi_list[0]
     air_cond = aqi_list[1].strip("'")
     return [aqi, air_cond]
-
-
-def get_timestamp():
-    ts = time.time()
-    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-    return st
-
-
-def save_alert(result_dict):
-    """Take a list and save it as a csv"""
-    # src_dir = os.path.dirname(os.path.realpath(__file__))
-    # w_log = os.path.join(src_dir + '/logs/', day + '.csv')
-    file_path = '/home/pi/Pi_Weather_Station/src/alerts.txt'
-    with open(file_path, 'w') as output:
-        output.write(str(result_dict))
 
 
 def read_alert():
@@ -134,5 +119,5 @@ if check_min() == True:
 
 
 if check_air() == True:
-    send_email('AQI max threshold crossed', ' 😷')
+    send_email('AQI max threshold crossed', '😷')
 

@@ -21,19 +21,19 @@
             <div class="double-input">
                 <div>
                     <label for="min_temp">Min Temp</label>
-                    Current Alert Setting: {{ stat_dict['min_temp'] }}<br />
+                    Current Alert Setting: <span class="blue-text"> {{ stat_dict['min_temp'] }} </span><br />
                     <input type="number" name="mintemp" id="min_temp" min="1" max="120" required />
                 </div>
                 <div>
                     <label for="max_temp">Max Temp</label>
-                    Current Alert Setting: {{ stat_dict['max_temp'] }}<br />
+                    Current Alert Setting: <span class="red-text"> {{ stat_dict['max_temp'] }} </span><br />
                     <input type="number" name="maxtemp" id="max_temp" min="1" max="120" required/>
                 </div>
             </div>
             <div class="single-input">
                 <div>
                     <label for="aqi_max">Max AQI</label>
-                    Current Alert Setting: {{ stat_dict['aqi_max'] }}<br />
+                    Current Alert Setting: <span class="green-text"> {{ stat_dict['aqi_max'] }} </span><br />
                     <input type="number" name="aqimax" id="aqi_max" placeholder="0 - 50 = Good" min="0" max="999" required />
                 </div>
             </div>

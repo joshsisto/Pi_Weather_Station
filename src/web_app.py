@@ -5,9 +5,14 @@ from sense_hat import SenseHat
 import os
 import csv
 import ast
+import tablib
+import pandas as pd
 
 
 app = Flask(__name__)
+
+dataset = tablib.Dataset()
+
 
 
 def get_csv_data():
@@ -69,6 +74,15 @@ def read_alert():
     return whip
 
 
+def update_logs_html():        
+    day = get_timestamp().split()[0]
+    csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
+    columns = ['Log Time', 'Temp (C)', 'Temp (F)', 'Humidity', 'Pressure', 'DewPoint', 'X', 'Y', 'Z', 'Weather', 'AQI']
+    df = pd.read_csv(csv_path, names=columns)
+    with open('/home/pi/Pi_Weather_Station/src/templates/logs.html', 'w') as html_file:
+        html_file.write(df.to_html())
+
+
 @app.route('/')
 def index():
     sense = SenseHat()
@@ -88,6 +102,27 @@ def index():
     aqi = get_gov_aqi()
     dark_sky = get_dark_sky()
     return render_template('weather.html', **kwargs, aqi=aqi, dark_sky=dark_sky)
+
+
+@app.route('/old')
+def old():
+    sense = SenseHat()
+    sense.clear()
+
+    acceleration = sense.get_accelerometer_raw()
+    celsius      = round(sense.get_temperature(), 1)
+    kwargs = dict(
+        celsius     = celsius,
+        fahrenheit  = round(1.8 * celsius + 32, 1),
+        humidity    = round(sense.get_humidity(), 1),
+        pressure    = round(sense.get_pressure(), 1),
+        x = round(acceleration['x'], 2),
+        y = round(acceleration['y'], 2),
+        z = round(acceleration['z'], 2),
+    )
+    aqi = get_gov_aqi()
+    dark_sky = get_dark_sky()
+    return render_template('weather_old.html', **kwargs, aqi=aqi, dark_sky=dark_sky)
 
 
 @app.route('/alerts/', methods=['POST', 'GET'])
@@ -110,11 +145,8 @@ def alerts():
 
 @app.route('/logs/')
 def logs_web():
-    day = get_timestamp().split()[0]
-    csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
-    with open(csv_path, 'r') as f:
-        content = f.read()
-    return render_template('logs.html', content=content)
+    update_logs_html()
+    return render_template('logs.html')
 
 
 while __name__ == '__main__':

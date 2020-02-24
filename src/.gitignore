@@ -1,2 +1,4 @@
-
+#ignore log files
 /logs
+#ignore credentials file
+credentials.py

@@ -1,13 +1,15 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from credentials import mailjet_user, mailjet_pass
 
 
 def send_email(subject, message_body):
     fromaddr = "Pi_Weather_Station@joshsisto.com"  # from email address
     toaddr = "joshsisto@gmail.com"  # destination email address
-    smtp_user = "591b58f61363d5d9d7518d7e96ecefd0"  # SMTP username used for authentication
-    smtp_pass = "cea1ca5b0ce623b465c02da9816832ad"  # SMTP password used for authentication
+    smtp_user = mailjet_user  # SMTP username used for authentication
+    smtp_pass = mailjet_pass  # SMTP password used for authentication
+    print('smtp_pass' + smtp_pass)
     msg = MIMEMultipart()
     msg['From'] = fromaddr
     msg['To'] = toaddr

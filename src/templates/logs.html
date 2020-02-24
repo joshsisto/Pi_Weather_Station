@@ -1,22 +1,832 @@
-<!doctype html>
-
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="author" content="Josh Sisto">
-        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-        <title>Raspberry Pi Weather Station</title>
-    </head>
-
-   <body>
-        <div class="header"></div>
-        <p><a href="/">Weather</a></p>
-
-        <pre>{{ content }}</pre>
-
-
-    </body>
-    <footer>
-        <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a> &copy; Josh Sisto</p>
-    </footer>
-</html>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Log Time</th>
+      <th>Temp (C)</th>
+      <th>Temp (F)</th>
+      <th>Humidity</th>
+      <th>Pressure</th>
+      <th>DewPoint</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Z</th>
+      <th>Weather</th>
+      <th>AQI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2020-02-24 00:00:04</td>
+      <td>20.3</td>
+      <td>68.5</td>
+      <td>63.7</td>
+      <td>1030.1</td>
+      <td>13.2</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[49.61, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[6, 'Good']</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2020-02-24 00:15:04</td>
+      <td>20.2</td>
+      <td>68.4</td>
+      <td>64.2</td>
+      <td>1030.1</td>
+      <td>13.2</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[49.39, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[6, 'Good']</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2020-02-24 00:30:03</td>
+      <td>20.1</td>
+      <td>68.2</td>
+      <td>63.9</td>
+      <td>1030.2</td>
+      <td>13.1</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[49.18, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[4, 'Good']</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2020-02-24 00:45:04</td>
+      <td>20.0</td>
+      <td>68.0</td>
+      <td>63.6</td>
+      <td>1030.4</td>
+      <td>12.9</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[48.51, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[4, 'Good']</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2020-02-24 01:00:04</td>
+      <td>19.8</td>
+      <td>67.6</td>
+      <td>63.5</td>
+      <td>1030.4</td>
+      <td>12.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[48.28, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[4, 'Good']</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020-02-24 01:15:04</td>
+      <td>19.7</td>
+      <td>67.5</td>
+      <td>63.5</td>
+      <td>1030.3</td>
+      <td>12.6</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[48.43, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[4, 'Good']</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2020-02-24 01:30:04</td>
+      <td>19.5</td>
+      <td>67.1</td>
+      <td>63.3</td>
+      <td>1030.2</td>
+      <td>12.3</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[47.85, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[3, 'Good']</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2020-02-24 01:45:04</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>64.5</td>
+      <td>1030.2</td>
+      <td>12.3</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[47.54, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[3, 'Good']</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2020-02-24 02:00:04</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>63.5</td>
+      <td>1030.1</td>
+      <td>12.1</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[46.85, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[3, 'Good']</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2020-02-24 02:15:04</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>63.5</td>
+      <td>1030.0</td>
+      <td>12.0</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[46.6, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[3, 'Good']</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2020-02-24 02:30:04</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>64.7</td>
+      <td>1030.0</td>
+      <td>12.4</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[46.35, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2020-02-24 02:45:04</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>64.7</td>
+      <td>1030.0</td>
+      <td>12.3</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[46.23, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2020-02-24 03:00:04</td>
+      <td>19.3</td>
+      <td>66.7</td>
+      <td>64.7</td>
+      <td>1030.0</td>
+      <td>12.5</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[45.5, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2020-02-24 03:15:03</td>
+      <td>19.3</td>
+      <td>66.7</td>
+      <td>66.2</td>
+      <td>1029.8</td>
+      <td>12.8</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[45.22, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>2020-02-24 03:30:03</td>
+      <td>19.3</td>
+      <td>66.7</td>
+      <td>65.8</td>
+      <td>1029.7</td>
+      <td>12.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[44.92, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>2020-02-24 03:45:03</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>66.4</td>
+      <td>1029.7</td>
+      <td>12.8</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[44.56, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>2020-02-24 04:00:03</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>67.4</td>
+      <td>1029.6</td>
+      <td>13.0</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[42.42, 'Clear', 'Possible drizzle on Sunday.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2020-02-24 04:15:04</td>
+      <td>19.3</td>
+      <td>66.7</td>
+      <td>67.9</td>
+      <td>1029.7</td>
+      <td>13.2</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[42.15, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[0, 'Good']</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>2020-02-24 04:30:03</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>67.6</td>
+      <td>1029.8</td>
+      <td>13.1</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[41.89, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>2020-02-24 04:45:04</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>66.1</td>
+      <td>1029.9</td>
+      <td>12.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[41.76, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2020-02-24 05:00:03</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>67.3</td>
+      <td>1030.1</td>
+      <td>12.9</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[41.88, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>2020-02-24 05:15:04</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>67.2</td>
+      <td>1030.0</td>
+      <td>12.9</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[41.66, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>2020-02-24 05:30:04</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>67.1</td>
+      <td>1030.1</td>
+      <td>12.9</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[41.45, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>2020-02-24 05:45:04</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>67.0</td>
+      <td>1030.1</td>
+      <td>12.8</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[42.05, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>2020-02-24 06:00:04</td>
+      <td>19.0</td>
+      <td>66.2</td>
+      <td>66.4</td>
+      <td>1030.3</td>
+      <td>12.6</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[41.98, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>2020-02-24 06:15:03</td>
+      <td>19.0</td>
+      <td>66.2</td>
+      <td>68.0</td>
+      <td>1030.3</td>
+      <td>13.0</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[42.04, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[5, 'Good']</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>2020-02-24 06:30:04</td>
+      <td>19.3</td>
+      <td>66.7</td>
+      <td>67.5</td>
+      <td>1030.2</td>
+      <td>13.1</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[42.17, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[9, 'Good']</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>2020-02-24 06:45:03</td>
+      <td>19.0</td>
+      <td>66.2</td>
+      <td>66.8</td>
+      <td>1030.3</td>
+      <td>12.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[43.46, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[9, 'Good']</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>2020-02-24 07:00:04</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>68.2</td>
+      <td>1030.3</td>
+      <td>13.1</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[43.85, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[9, 'Good']</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>2020-02-24 07:15:03</td>
+      <td>19.0</td>
+      <td>66.2</td>
+      <td>65.6</td>
+      <td>1030.5</td>
+      <td>12.4</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[45.43, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[9, 'Good']</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>2020-02-24 07:30:04</td>
+      <td>18.9</td>
+      <td>66.0</td>
+      <td>66.5</td>
+      <td>1030.3</td>
+      <td>12.5</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[45.29, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[10, 'Good']</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>2020-02-24 07:45:04</td>
+      <td>19.2</td>
+      <td>66.6</td>
+      <td>66.6</td>
+      <td>1030.5</td>
+      <td>12.8</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[46.66, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[10, 'Good']</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>2020-02-24 08:00:04</td>
+      <td>19.1</td>
+      <td>66.4</td>
+      <td>68.3</td>
+      <td>1030.6</td>
+      <td>13.1</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[47.59, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[10, 'Good']</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>2020-02-24 08:15:04</td>
+      <td>19.5</td>
+      <td>67.1</td>
+      <td>67.7</td>
+      <td>1030.7</td>
+      <td>13.4</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[48.69, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[10, 'Good']</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>2020-02-24 08:30:04</td>
+      <td>19.7</td>
+      <td>67.5</td>
+      <td>68.7</td>
+      <td>1030.7</td>
+      <td>13.8</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[49.94, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[14, 'Good']</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>2020-02-24 08:45:04</td>
+      <td>19.8</td>
+      <td>67.6</td>
+      <td>66.8</td>
+      <td>1030.9</td>
+      <td>13.5</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[51.27, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[14, 'Good']</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>2020-02-24 09:00:04</td>
+      <td>20.1</td>
+      <td>68.2</td>
+      <td>68.4</td>
+      <td>1030.8</td>
+      <td>14.1</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[52.52, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[14, 'Good']</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>2020-02-24 09:15:04</td>
+      <td>20.3</td>
+      <td>68.5</td>
+      <td>67.7</td>
+      <td>1030.6</td>
+      <td>14.1</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[53.75, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[14, 'Good']</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>2020-02-24 09:30:04</td>
+      <td>20.6</td>
+      <td>69.1</td>
+      <td>66.0</td>
+      <td>1030.5</td>
+      <td>14.0</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[54.99, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[13, 'Good']</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>2020-02-24 09:45:04</td>
+      <td>20.9</td>
+      <td>69.6</td>
+      <td>67.1</td>
+      <td>1030.4</td>
+      <td>14.6</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[54.72, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[13, 'Good']</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>2020-02-24 10:00:04</td>
+      <td>21.0</td>
+      <td>69.8</td>
+      <td>66.4</td>
+      <td>1030.2</td>
+      <td>14.5</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[56.03, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[13, 'Good']</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>2020-02-24 10:15:04</td>
+      <td>21.3</td>
+      <td>70.3</td>
+      <td>66.0</td>
+      <td>1030.1</td>
+      <td>14.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[57.82, 'Clear', 'No precipitation throughout the week.']</td>
+      <td>[13, 'Good']</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>2020-02-24 10:30:03</td>
+      <td>21.8</td>
+      <td>71.2</td>
+      <td>63.6</td>
+      <td>1029.9</td>
+      <td>14.6</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[58.83, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[15, 'Good']</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>2020-02-24 10:45:03</td>
+      <td>22.1</td>
+      <td>71.8</td>
+      <td>63.5</td>
+      <td>1029.7</td>
+      <td>14.9</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[59.51, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[15, 'Good']</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>2020-02-24 11:00:03</td>
+      <td>22.4</td>
+      <td>72.3</td>
+      <td>61.9</td>
+      <td>1029.5</td>
+      <td>14.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[59.3, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[15, 'Good']</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>2020-02-24 11:15:03</td>
+      <td>22.8</td>
+      <td>73.0</td>
+      <td>60.8</td>
+      <td>1029.4</td>
+      <td>14.8</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[60.48, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[15, 'Good']</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>2020-02-24 11:30:03</td>
+      <td>23.1</td>
+      <td>73.6</td>
+      <td>58.6</td>
+      <td>1029.3</td>
+      <td>14.5</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[61.66, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[20, 'Good']</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>2020-02-24 11:45:03</td>
+      <td>23.5</td>
+      <td>74.3</td>
+      <td>57.0</td>
+      <td>1028.9</td>
+      <td>14.5</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[63.28, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[20, 'Good']</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>2020-02-24 12:00:04</td>
+      <td>24.0</td>
+      <td>75.2</td>
+      <td>56.3</td>
+      <td>1028.8</td>
+      <td>14.8</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[64.45, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[20, 'Good']</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>2020-02-24 12:15:04</td>
+      <td>24.2</td>
+      <td>75.6</td>
+      <td>54.8</td>
+      <td>1028.3</td>
+      <td>14.5</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[65.54, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[20, 'Good']</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>2020-02-24 12:30:03</td>
+      <td>24.5</td>
+      <td>76.1</td>
+      <td>52.9</td>
+      <td>1028.0</td>
+      <td>14.3</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[66.6, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[26, 'Good']</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>2020-02-24 12:45:04</td>
+      <td>24.9</td>
+      <td>76.8</td>
+      <td>51.4</td>
+      <td>1027.8</td>
+      <td>14.2</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[67.6, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[26, 'Good']</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>2020-02-24 13:00:04</td>
+      <td>25.4</td>
+      <td>77.7</td>
+      <td>48.8</td>
+      <td>1027.7</td>
+      <td>13.9</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[68.64, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[26, 'Good']</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>2020-02-24 13:15:04</td>
+      <td>26.0</td>
+      <td>78.8</td>
+      <td>46.7</td>
+      <td>1027.4</td>
+      <td>13.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[68.69, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[26, 'Good']</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>2020-02-24 13:30:04</td>
+      <td>26.4</td>
+      <td>79.5</td>
+      <td>45.5</td>
+      <td>1027.0</td>
+      <td>13.7</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[69.78, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[30, 'Good']</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>2020-02-24 13:45:05</td>
+      <td>27.4</td>
+      <td>81.3</td>
+      <td>43.8</td>
+      <td>1027.0</td>
+      <td>14.0</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[70.3, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[30, 'Good']</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>2020-02-24 14:00:04</td>
+      <td>27.8</td>
+      <td>82.0</td>
+      <td>41.5</td>
+      <td>1026.7</td>
+      <td>13.5</td>
+      <td>-0.03</td>
+      <td>0.99</td>
+      <td>-0.1</td>
+      <td>[70.87, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[30, 'Good']</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>2020-02-24 14:15:04</td>
+      <td>28.3</td>
+      <td>82.9</td>
+      <td>40.6</td>
+      <td>1026.3</td>
+      <td>13.6</td>
+      <td>-0.03</td>
+      <td>1.00</td>
+      <td>-0.1</td>
+      <td>[71.3, 'Clear', 'Drizzle on Sunday.']</td>
+      <td>[30, 'Good']</td>
+    </tr>
+  </tbody>
+</table>
