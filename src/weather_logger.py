@@ -97,6 +97,9 @@ def get_weather():
     weather_list.append(current_temp)
     weather_list.append(daily_sum)
     weather_list.append(forecast)
+    file_path = '/home/pi/Pi_Weather_Station/src/weather.json'
+    with open(file_path, 'w', encoding='utf-8') as output:
+        json.dump(data, output, ensure_ascii=False, indent=4)
     return weather_list
 
 # print(get_weather())

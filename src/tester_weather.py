@@ -10,6 +10,17 @@ from weather import get_timestamp
 from sendEmail import *
 import tablib
 import pandas as pd
+import json
+
+
+def convert_epoch(epoch_time):
+    converted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(epoch_time))
+    return converted_time
+
+
+def epoch_to_day(epoch_time):
+    converted_time = time.strftime('%A', time.localtime(epoch_time))
+    return converted_time
 
 
 def get_csv_data():
@@ -172,3 +183,37 @@ def update_logs_html():
 # update_logs_html()
 
 # send_email('mailjet fix', 'mailjet has updated credentials')
+
+
+with open('weather.json') as json_file:
+    data = json.load(json_file)
+current_cond = data['currently']['summary']
+chance_of_rain = data['currently']['precipProbability']
+current_temp = data['currently']['temperature']
+feels_like_temp = data['currently']['apparentTemperature']
+dew_point = data['currently']['dewPoint']
+current_hum = data['currently']['humidity']
+current_press = data['currently']['pressure']
+current_wind = data['currently']['windSpeed']
+wind_bearing = data['currently']['windBearing']
+current_uv = data['currently']['uvIndex']
+current_vis = data['currently']['visibility']
+
+forecast = data['daily']['summary']
+today_sunrise = data['daily']['data'][0]['sunriseTime']
+today_sunset = data['daily']['data'][0]['sunsetTime']
+today_temp_hi = data['daily']['data'][0]['temperatureHigh']
+today_temp_lo = data['daily']['data'][0]['temperatureLow']
+
+tom_time = data['daily']['data'][1]['time']
+tomorrow = epoch_to_day(tom_time) # get day of week for tomorrow
+tom_summary = data['daily']['data'][1]['summary']
+tom_temp_hi = data['daily']['data'][1]['temperatureHigh']
+tom_temp_lo = data['daily']['data'][1]['temperatureLow']
+tom_chance_rain = data['daily']['data'][1]['precipProbability']
+
+print(current_press)
+print(convert_epoch(today_sunrise))
+print(convert_epoch(today_sunset))
+print()
+print(epoch_to_day(tomorrow))

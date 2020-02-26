@@ -10,43 +10,65 @@
 </head>
 
 <body>
-    <header>Sacramento California USA 🇺🇸</header>
-    <nav class="container">
-        <h3><a href="alerts">Alerts</a> <a href="logs">Logs</a></h3>
-        <h3>Raspberry Pi Powered Weather Station</h3>
+    <!-- <header>Sacramento California USA 🇺🇸</header> -->
+    <nav class="inner">
+        <a href="alerts">Alerts</a> <a href="logs">Logs</a> <a href="https://darksky.net">Dark Sky</a> <a href="#">About</a>
     </nav>
-    <h2 class="center">Raspberry Pi Sensor Readings</h2>
-    <div class="container">
-        <div>
-            <h3 class="bg-gray">Temperature</h3>
-            <p><strong>Celsius:</strong> {{ celsius }}</p>
-            <p><strong>Fahrenheit:</strong> {{ fahrenheit }}</p>
-        </div>
-        <div>
-            <h3 class="bg-gray">Humid. & Press.</h3>
-            <p><strong>Humidity:</strong> {{ humidity }}</p>
-            <p><strong>Pressure:</strong> {{ pressure }}</p>
-        </div>
-        <div>
-            <h3 class="bg-gray">Orientation</h3>
-            <p><strong>X:</strong> {{ x }} <strong>Y:</strong> {{ y }} <strong>Z:</strong> {{ z }}</p>
-        </div>
+    <div id="location">
+        Sacramento California USA 🇺🇸
     </div>
 
-    <h2 class="center">Weather and Air Quality</h2>
-    <div class="container">
-        <div>
-            <h3 class="bg-gray">Weather Provided By darksky.net</h3>
-            <p>Temp: {{ dark_sky[0] }} </p>
-            <p>Current Conditions: {{ dark_sky[1] }} </p>
-            <p>Forecast: {{ dark_sky[2] }} </p>
-        </div>
-        <div>
-            <h3 class="bg-gray">Air Quality Index</h3>
-            <p>AQI: {{ aqi[0] }} </p>
-            <p>Status: {{ aqi[1] }} </p>
-        </div>
-    </div>
+    <div class="wind">
+        <span class="label swip">Wind:</span>
+        <span class="val swap">
+          <span class="num swip wind__speed__value">11</span>
+          <span class="unit swap">mph</span>
+          
+          <span class="direction" title="SE" style="display:inline-block;-ms-transform:rotate(136deg);-webkit-transform:rotate(136deg);transform:rotate(136deg);">↑</span>
+        </span>
+      </div>
+
+      <div class="humidity">
+        <span class="label swip">Humidity:</span>
+        <span class="val swap">
+          <span class="num swip humidity__value">26</span><span class="unit swap">%</span>
+        </span>
+      </div>
+
+      <div class="dew_point">
+        <span class="label swip">Dew Pt:</span>
+        <span class="val swap">
+          <span class="num dew__point__value">33</span><span class="unit">˚</span>
+        </span>
+      </div>
+
+      <div class="current_details_break"></div>
+
+      <div class="uv_index uv1">
+        <span class="label swip">UV Index:</span>
+        <span class="val swap">
+          <span class="num uv__index__value">3</span>
+        </span>
+      </div>
+
+      <div class="visibility">
+        
+        <span class="label swip">Visibility:</span>
+        <span class="val swap">
+          <span class="num swip visibility__value">10+</span>
+          <span class="unit swap">mi</span>
+        </span>
+      </div>
+
+      <div class="pressure">
+        <span class="label swip">Pressure:</span>
+        <span class="val swap">
+          <span class="num swip pressure__value">1025</span>
+          <span class="unit swap">mb</span>
+        </span>
+      </div>
+    
+
 
     <footer class="center">
         <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a></p>
