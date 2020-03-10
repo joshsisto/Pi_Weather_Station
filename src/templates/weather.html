@@ -5,72 +5,138 @@
 <head>
     <meta charset="utf-8">
     <meta name="author" content="Josh Sisto">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" media="screen and (max-width: 480px)" href="{{ url_for('static', filename='mobile.css') }}" /> -->
+    <!-- <link rel="stylesheet" media="screen and (min-width: 481px) and (max-width: 768px)" href="{{ url_for('static', filename='tablet.css') }}" /> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>Raspberry Pi Weather Station</title>
 </head>
 
-<body>
+<body class="forecast">
     <!-- <header>Sacramento California USA 🇺🇸</header> -->
-    <nav class="inner">
-        <a href="alerts">Alerts</a> <a href="logs">Logs</a> <a href="https://darksky.net">Dark Sky</a> <a href="#">About</a>
+    <nav>
+        <div class="inner">
+            <ul>
+                <li><a href="alerts">Alerts</a></li>
+                <li><a href="logs">Logs</a></li>
+                <li><a href="https://darksky.net">Dark Sky</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+
+        </div>
     </nav>
     <div id="location">
         Sacramento California USA 🇺🇸
     </div>
 
-    <div class="wind">
-        <span class="label swip">Wind:</span>
-        <span class="val swap">
-          <span class="num swip wind__speed__value">11</span>
-          <span class="unit swap">mph</span>
-          
-          <span class="direction" title="SE" style="display:inline-block;-ms-transform:rotate(136deg);-webkit-transform:rotate(136deg);transform:rotate(136deg);">↑</span>
-        </span>
-      </div>
+    <div id="currentDetails">
+        <div class="wind">
+            <span class="label swip">Wind:</span>
+            <span class="val swap">
+                <span class="num swip wind__speed__value">{{ current_wind }}</span>
+                <span class="unit swap">mph</span>
 
-      <div class="humidity">
-        <span class="label swip">Humidity:</span>
-        <span class="val swap">
-          <span class="num swip humidity__value">26</span><span class="unit swap">%</span>
-        </span>
-      </div>
+                <span class="direction" title="SE"
+                    style="display:inline-block;-ms-transform:rotate({{ wind_bearing }}deg);-webkit-transform:rotate({{ wind_bearing }}deg);transform:rotate({{ wind_bearing }}deg);">↑</span>
+            </span>
+        </div>
 
-      <div class="dew_point">
-        <span class="label swip">Dew Pt:</span>
-        <span class="val swap">
-          <span class="num dew__point__value">33</span><span class="unit">˚</span>
-        </span>
-      </div>
+        <div class="humidity">
+            <span class="label swip">Humidity:</span>
+            <span class="val swap">
+                <span class="num swip humidity__value">{{ current_hum }}</span><span class="unit swap">%</span>
+            </span>
+        </div>
 
-      <div class="current_details_break"></div>
+        <div class="dew_point">
+            <span class="label swip">Dew Pt:</span>
+            <span class="val swap">
+                <span class="num dew__point__value">{{ dew_point }}</span><span class="unit">˚</span>
+            </span>
+        </div>
 
-      <div class="uv_index uv1">
-        <span class="label swip">UV Index:</span>
-        <span class="val swap">
-          <span class="num uv__index__value">3</span>
-        </span>
-      </div>
+        <div class="current_details_break"></div>
 
-      <div class="visibility">
+        <div class="uv_index uv1">
+            <span class="label swip">UV Index:</span>
+            <span class="val swap">
+                <span class="num uv__index__value">{{ current_uv }}</span>
+            </span>
+        </div>
+
+        <div class="visibility">
+            <span class="label swip">Visibility:</span>
+            <span class="val swap">
+                <span class="num swip visibility__value">{{ current_vis }}</span>
+                <span class="unit swap">mi</span>
+            </span>
+        </div>
+
+        <div class="pressure">
+            <span class="label swip">Pressure:</span>
+            <span class="val swap">
+                <span class="num swip visibility__value">{{ current_press }}</span>
+                <span class="unit swap">mi</span>
+            </span>
+        </div>
+    </div>
+
+
+    <div class="center">
+        <div id="title">
+            <span class="currently">
+                <!-- <span class="clear-day-icon-currently currently-icon swip">
+                    <img src="/images/weather-icons/clear-day.png" alt="clear-day Icon" width="84" height="84">
+                </span> -->
+                <span class="desc swap">
+                    <span class="summary swap">{{ current_temp }}˚&nbsp;{{ current_cond }}</span>
+                    <span class="summary-high-low">
+                        <span><span class="high-low-label">Feels Like:&nbsp;</span>
+                            <span class="feels-like-text">{{ feels_like_temp }}˚</span></span>
+                        <span><span class="high-low-label">Low:&nbsp;</span><span
+                                class="low-temp-text">{{ today_temp_lo }}˚</span></span>
+                        <span><span class="high-low-label">High:&nbsp;</span><span
+                                class="high-temp-text">{{ today_temp_hi }}˚</span></span>
+                    </span>
+                    <span class="summary-sunrise-sunset">
+                        <span><span class="sunrise-sunset-label">Sunrise:&nbsp;</span><span
+                                class="sunrise-text">{{ today_sunrise }}</span></span>
+                        <span><span class="sunrise-sunset-label"> Sunset:&nbsp;</span><span
+                                class="sunset-text">{{ today_sunset }}</span></span>
+                    </span>
+                </span>
+            </span>
+
+            <span class="currently__summary next swap">
+                {{ hour_summary }}
+            </span>
+
+            <span class="currently__forecast next swap">
+                {{ forecast }}
+            </span>
+
+        </div>
+    </div>
+
+    <div class="three-day">
         
-        <span class="label swip">Visibility:</span>
-        <span class="val swap">
-          <span class="num swip visibility__value">10+</span>
-          <span class="unit swap">mi</span>
-        </span>
-      </div>
+    </div>
 
-      <div class="pressure">
-        <span class="label swip">Pressure:</span>
-        <span class="val swap">
-          <span class="num swip pressure__value">1025</span>
-          <span class="unit swap">mb</span>
-        </span>
-      </div>
-    
+    <div class="center">
+        <div id="pi_stats">
+            <ul>
+                <li class="bold-text">Pi Stats:</li>
+                <li>Temp: {{ fahrenheit }}</li>
+                <li>Humidity: {{ humidity }}</li>
+                <li>Pressure: {{ pressure }}
+                <li>X: {{ x }}</li>
+                <li>Y: {{ y }}</li>
+                <li>Z: {{ z }}</li>
+            </ul>
+        </div>
+    </div>
 
-
-    <footer class="center">
+    <footer>
         <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a></p>
     </footer>
 </body>

@@ -212,8 +212,26 @@ tom_temp_hi = data['daily']['data'][1]['temperatureHigh']
 tom_temp_lo = data['daily']['data'][1]['temperatureLow']
 tom_chance_rain = data['daily']['data'][1]['precipProbability']
 
-print(current_press)
-print(convert_epoch(today_sunrise))
-print(convert_epoch(today_sunset))
-print()
-print(epoch_to_day(tomorrow))
+d2_time = data['daily']['data'][2]['time']
+d2 = epoch_to_day(d2_time) # get day 2
+d2_summary = data['daily']['data'][2]['summary']
+d2_temp_hi = data['daily']['data'][2]['temperatureHigh']
+d2_temp_lo = data['daily']['data'][2]['temperatureLow']
+d2_chance_rain = data['daily']['data'][2]['precipProbability']
+
+d3_time = data['daily']['data'][3]['time']
+d3 = epoch_to_day(d3_time) # get day 2
+d3_summary = data['daily']['data'][3]['summary']
+d3_temp_hi = data['daily']['data'][3]['temperatureHigh']
+d3_temp_lo = data['daily']['data'][3]['temperatureLow']
+d3_chance_rain = data['daily']['data'][3]['precipProbability']
+
+# print(current_press)
+# print(convert_epoch(today_sunrise))
+# print(convert_epoch(today_sunset))
+# print()
+# print(tomorrow)
+# print(d2)
+# print(d3)
+
+send_email('Are we online?', 'hoping this works')

@@ -23,9 +23,12 @@ def get_sensor_data():
     fahrenheit = round(1.8 * celsius + 32, 1)
     humidity = round(sense.get_humidity(), 1)
     pressure = round(sense.get_pressure(), 1)
-    dewpoint = (round(243.04 * (log(humidity / 100)
-                + ((17.625 * celsius) / (243.04 + celsius))) / (17.625 - log(humidity / 100)
-                                                                - (17.625 * celsius) / (243.04 + celsius)), 1))
+    try:        
+        dewpoint = (round(243.04 * (log(humidity / 100)
+                    + ((17.625 * celsius) / (243.04 + celsius))) / (17.625 - log(humidity / 100)
+                                                                    - (17.625 * celsius) / (243.04 + celsius)), 1))
+    except:
+        dewpoint = 'broken'
     return [celsius, fahrenheit, humidity, pressure, dewpoint]
 
 

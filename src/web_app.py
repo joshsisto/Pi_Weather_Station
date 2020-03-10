@@ -2,17 +2,27 @@ from flask import Flask, request, render_template
 from sendEmail import send_email
 from weather import get_timestamp
 from sense_hat import SenseHat
+import time
 import os
 import csv
 import ast
 import tablib
 import pandas as pd
+import json
 
 
 app = Flask(__name__)
 
 dataset = tablib.Dataset()
 
+def convert_epoch(epoch_time):
+    converted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(epoch_time))
+    return converted_time
+
+
+def epoch_to_day(epoch_time):
+    converted_time = time.strftime('%A', time.localtime(epoch_time))
+    return converted_time
 
 
 def get_csv_data():
@@ -85,12 +95,60 @@ def update_logs_html():
 
 @app.route('/')
 def index():
+    with open('/home/pi/Pi_Weather_Station/src/weather.json') as json_file:
+        data = json.load(json_file)
+    tom_time = data['daily']['data'][1]['time']
+    d2_time = data['daily']['data'][2]['time']
+    d3_time = data['daily']['data'][3]['time']
+    today_sunrise = data['daily']['data'][0]['sunriseTime']
+    today_sunset = data['daily']['data'][0]['sunsetTime']
+
+    kwargs = dict(
+    current_cond = data['currently']['summary'],
+    chance_of_rain = data['currently']['precipProbability'],
+    current_temp = data['currently']['temperature'],
+    feels_like_temp = data['currently']['apparentTemperature'],
+    dew_point = data['currently']['dewPoint'],
+    current_hum = data['currently']['humidity'],
+    current_press = data['currently']['pressure'],
+    current_wind = data['currently']['windSpeed'],
+    wind_bearing = data['currently']['windBearing'],
+    current_uv = data['currently']['uvIndex'],
+    current_vis = data['currently']['visibility'],
+    hour_summary = data['hourly']['summary'],
+
+    forecast = data['daily']['summary'],
+    today_sunrise = convert_epoch(today_sunrise).split()[1],
+    today_sunset = convert_epoch(today_sunset).split()[1],
+    today_temp_hi = data['daily']['data'][0]['temperatureHigh'],
+    today_temp_lo = data['daily']['data'][0]['temperatureLow'],
+
+    tom_time = data['daily']['data'][1]['time'],
+    tomorrow = epoch_to_day(tom_time), # get day of week for tomorrow
+    tom_summary = data['daily']['data'][1]['summary'],
+    tom_temp_hi = data['daily']['data'][1]['temperatureHigh'],
+    tom_temp_lo = data['daily']['data'][1]['temperatureLow'],
+    tom_chance_rain = data['daily']['data'][1]['precipProbability'],
+
+    d2_time = data['daily']['data'][2]['time'],
+    d2 = epoch_to_day(d2_time), # get day 2
+    d2_summary = data['daily']['data'][2]['summary'],
+    d2_temp_hi = data['daily']['data'][2]['temperatureHigh'],
+    d2_temp_lo = data['daily']['data'][2]['temperatureLow'],
+    d2_chance_rain = data['daily']['data'][2]['precipProbability'],
+
+    d3_time = data['daily']['data'][3]['time'],
+    d3 = epoch_to_day(d3_time), # get day 2
+    d3_summary = data['daily']['data'][3]['summary'],
+    d3_temp_hi = data['daily']['data'][3]['temperatureHigh'],
+    d3_temp_lo = data['daily']['data'][3]['temperatureLow'],
+    d3_chance_rain = data['daily']['data'][3]['precipProbability']
+    )
     sense = SenseHat()
     sense.clear()
-
     acceleration = sense.get_accelerometer_raw()
     celsius      = round(sense.get_temperature(), 1)
-    kwargs = dict(
+    kwargs2 = dict(
         celsius     = celsius,
         fahrenheit  = round(1.8 * celsius + 32, 1),
         humidity    = round(sense.get_humidity(), 1),
@@ -99,16 +157,13 @@ def index():
         y = round(acceleration['y'], 2),
         z = round(acceleration['z'], 2),
     )
-    aqi = get_gov_aqi()
-    dark_sky = get_dark_sky()
-    return render_template('weather.html', **kwargs, aqi=aqi, dark_sky=dark_sky)
+    return render_template('weather.html', **kwargs, **kwargs2)
 
 
 @app.route('/old')
 def old():
     sense = SenseHat()
     sense.clear()
-
     acceleration = sense.get_accelerometer_raw()
     celsius      = round(sense.get_temperature(), 1)
     kwargs = dict(

@@ -1,0 +1,212 @@
+
+#location {
+    text-align: center;
+    padding: 15px;
+}
+
+#currentDetails {
+    position: relative;
+    text-align: center;
+    left: -10px;
+    white-space: nowrap;
+    font-size: 14px;
+    margin: 0 auto;
+    max-width: 950px;
+    width: 100%;
+    line-height: 40px;
+    padding: 0 20px;
+    background-color:
+    rgba(238,238,238,.35);
+    overflow: hidden;
+}
+
+#currentDetails > div {
+    display: inline-block;
+    text-align: center;
+    margin: 0 10px;
+}
+
+nav {
+    display: table;
+    width: 100%;
+    background-color: #333;
+    color:  #fff;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+nav a {
+    color: white;
+    /* padding: 0 5%; */
+    /* position: relative; */
+    /* top: -8px; */
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav li {
+    display: inline;
+}
+
+nav a:hover {
+    color: lightgray;
+}
+
+nav > .inner {
+    margin: 6px auto;
+    /* width: 80%; */
+    max-width: 900px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+footer {
+    text-align: center;
+    justify-content: center;
+}
+
+/* ############ */
+/* main content */
+/* ############ */
+
+.center {
+    width: 100%;
+    max-width: 830px;
+    margin: 0 auto;
+}
+
+body.forecast #title {
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+    margin: 12px 15px;
+}
+
+body.forecast #title .currently {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.forecast #title {
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+}
+
+body.forecast #title .currently .desc.swap {
+    font-weight: 600;
+    text-align: left;
+}
+
+body.forecast #title .currently .desc, body.forecast #title .next {
+    position: relative;
+    top: 7px;
+    line-height: 1.3em;
+    margin-bottom: 15px;
+}
+
+body.forecast #title span {
+    display: inline-block;
+}
+
+body.forecast #title .next.swap {
+    position: relative;
+    top: 0;
+    display: block;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 6px;
+}
+
+
+body.forecast #title span.summary-high-low {
+    display: flex;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+}
+body.forecast #title span.summary-high-low span:first-child {
+    margin-left: 0;
+    /* padding: 10px; */
+}
+body.forecast #title span.summary-high-low .high-low-label {
+    /* font-weight: 400; */
+    /* padding: 10px; */
+}
+body.forecast #title span.high-low-label {
+    font-weight: bold;
+    /* padding: 10px; */
+}
+
+span.high-low-label {
+    font-weight: bold;
+}
+
+
+body.forecast #title span.summary-sunrise-sunset {
+    display: flex;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    /* padding: 10px; */
+}
+body.forecast #title span.summary-sunrise-sunset span:first-child {
+    margin-left: 0;
+    /* padding: 10px; */
+}
+body.forecast #title span.summary-sunrise-sunset .high-low-label {
+    /* font-weight: 400; */
+    /* padding: 10px; */
+}
+body.forecast #title span.sunrise-sunset-label {
+    font-weight: bold;
+    /* padding: 10px; */
+}
+
+body.forecast #title span.summary-high-low > span {
+    margin: 0 3px;
+}
+body.forecast #title span.summary-sunrise-sunset > span {
+    margin: 0 3px;
+}
+
+#pi_stats ul li {
+    /* text-transform: none; */
+    display: inline;
+    list-style-type: none;
+    padding-right: 3px;
+    justify-items: center;
+}
+
+div.center div#pi_stats {
+    background-color: lightgray;
+}
+
+#pi_stats {
+    display: table;
+    width: 100%;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.three-day {
+    /* 3 day columns */
+}
+
+
+@media only screen and (max-width: 480px) {
+    nav li {
+        /* background-color: red; */
+        display: block;
+    }
+
+    #currentDetails > div {
+        display: block;
+    }
+}
+

@@ -1,0 +1,7 @@
+
+@media only screen and (max-width: 480px) {
+    nav {
+        background-color: red;
+        display: flex;
+    }
+}
