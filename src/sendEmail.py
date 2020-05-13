@@ -5,7 +5,7 @@ from credentials import mailjet_user, mailjet_pass
 
 
 def send_email(subject, message_body):
-    fromaddr = "Pi_Weather_Station@joshsisto.com"  # from email address
+    fromaddr = "Pi_Weather_Station@sisto.xyz"  # from email address
     toaddr = "joshsisto@gmail.com"  # destination email address
     smtp_user = mailjet_user  # SMTP username used for authentication
     smtp_pass = mailjet_pass  # SMTP password used for authentication
