@@ -1,1 +1,1 @@
-{'aqi_max': '50', 'min_temp': '40', 'max_temp': '90'}
+{'aqi_max': '40', 'max_temp': '90', 'min_temp': '32'}
