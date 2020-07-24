@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from credentials import mailjet_user, mailjet_pass
+from credentials import *
 
 
 def send_email(message_body):
