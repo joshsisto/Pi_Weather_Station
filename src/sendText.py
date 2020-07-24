@@ -1,7 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from credentials import *
+from credentials import alert_addr, gmail_user, gmail_app_pass
 
 
 def send_email(message_body):
