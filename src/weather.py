@@ -96,6 +96,6 @@ def weather():
     sense.show_message(sense_data, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
 
 
-# while __name__ == '__main__':
+while __name__ == '__main__':
     weather()
 
