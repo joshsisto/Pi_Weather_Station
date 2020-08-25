@@ -57,12 +57,13 @@ def get_dark_sky():
 def get_gov_aqi():
     """Read the most recent aqi log and return the stats"""
     csv_content = get_csv_data()
-    most_recent = csv_content[-1]
-    aqi_string = most_recent[10]
-    aqi_list = aqi_string.strip('][').split(', ')
-    aqi = aqi_list[0]
-    air_cond = aqi_list[1].strip("'")
-    return [aqi, air_cond]
+    latest_entry = csv_content[-1]
+    current_aqi = latest_entry[-1]
+    # aqi_string = most_recent[10]
+    # aqi_list = aqi_string.strip('][').split(', ')
+    # aqi = aqi_list[0]
+    # air_cond = aqi_list[1].strip("'")
+    return current_aqi
 
 # print(get_gov_aqi())
 
@@ -104,6 +105,7 @@ def index():
     today_sunset = data['daily']['data'][0]['sunsetTime']
 
     kwargs = dict(
+    current_aqi = get_gov_aqi(),
     current_cond = data['currently']['summary'],
     chance_of_rain = data['currently']['precipProbability'],
     current_temp = data['currently']['temperature'],

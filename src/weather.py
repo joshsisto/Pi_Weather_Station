@@ -7,6 +7,17 @@ import os
 from math import log
 from sense_hat import SenseHat
 
+from flask import Flask, request, render_template
+from sendEmail import send_email
+from sense_hat import SenseHat
+import time
+import os
+import csv
+import ast
+import tablib
+import pandas as pd
+import json
+
 sense = SenseHat()
 
 RED = [155, 0, 0]
@@ -15,7 +26,65 @@ ORANGE = [255, 127, 0]
 YELLOW = [155, 155, 0]
 GREEN = [0, 155, 0]
 BLUE = [0, 0, 155]
+PURPLE = [128, 0, 128]
 WHITE = [155, 155, 155]
+BRIGHT_WHITE = [255, 255, 255]
+
+
+
+dataset = tablib.Dataset()
+
+def convert_epoch(epoch_time):
+    converted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(epoch_time))
+    return converted_time
+
+
+def epoch_to_day(epoch_time):
+    converted_time = time.strftime('%A', time.localtime(epoch_time))
+    return converted_time
+
+
+def get_csv_data():
+    """Open the daily csv log and return the content"""
+    csv_list = []
+    day = get_timestamp().split()[0]
+    csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
+    # csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
+    with open(csv_path, 'r') as csv_file:
+        # content = f.read()
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            # print(row)
+            csv_list.append(row)
+    return csv_list
+
+# print(get_csv_data())
+
+def get_dark_sky():
+    """Read the most recent dark sky log and return a list of the stats"""
+    csv_content = get_csv_data()
+    most_recent = csv_content[-1]
+    dark_sky_string = most_recent[9]
+    dark_sky_list = dark_sky_string.strip('][').split(', ')
+    ds_temp = dark_sky_list[0]
+    ds_cond = dark_sky_list[1].strip("'")
+    ds_fore = dark_sky_list[2].strip("'")
+    return [ds_temp, ds_cond, ds_fore]
+
+# print(get_dark_sky())
+
+def get_gov_aqi():
+    """Read the most recent aqi log and return the stats"""
+    csv_content = get_csv_data()
+    most_recent = csv_content[-1]
+    aqi_string = most_recent[10]
+    aqi_list = aqi_string.strip('][').split(', ')
+    aqi = aqi_list[0]
+    air_cond = aqi_list[1].strip("'")
+    return [aqi, air_cond]
+
+# print(get_gov_aqi())
+
 
 
 def get_timestamp():
@@ -23,19 +92,6 @@ def get_timestamp():
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
     return st
 
-
-def get_sensor_data():
-    """Get sensor data from SenseHAT"""
-    sense = SenseHat()
-    sense.clear()
-    celsius = round(sense.get_temperature(), 1)
-    fahrenheit = round(1.8 * celsius + 32, 1)
-    humidity = round(sense.get_humidity(), 1)
-    pressure = round(sense.get_pressure(), 1)
-    dewpoint = (round(243.04 * (log(humidity / 100)
-                + ((17.625 * celsius) / (243.04 + celsius))) / (17.625 - log(humidity / 100)
-                                                                - (17.625 * celsius) / (243.04 + celsius)), 1))
-    return [celsius, fahrenheit, humidity, pressure, dewpoint]
 
 
 def get_xyz():
@@ -66,19 +122,19 @@ def set_orientation():
 
 def set_screen_color(fahrenheit):
     """Set screen color based on temperature"""
-    if 20 <= fahrenheit <= 80:
+    if 20 <= int(fahrenheit) <= 80:
         bg_color = BLUE
-    elif 81 <= fahrenheit <= 90:
+    elif 81 <= int(fahrenheit) <= 90:
         bg_color = GREEN
-    elif 91 <= fahrenheit <= 100:
+    elif 91 <= int(fahrenheit) <= 100:
         bg_color = YELLOW
-    elif 101 <= fahrenheit <= 102:
+    elif 101 <= int(fahrenheit) <= 102:
         bg_color = ORANGE
-    elif 103 <= fahrenheit <= 104:
+    elif 103 <= int(fahrenheit) <= 104:
         bg_color = RED
-    elif 105 <= fahrenheit <= 109:
+    elif 105 <= int(fahrenheit) <= 109:
         bg_color = BRED
-    elif 110 <= fahrenheit <= 120:
+    elif 110 <= int(fahrenheit) <= 120:
         bg_color = WHITE
     else:
         bg_color = GREEN
@@ -87,15 +143,21 @@ def set_screen_color(fahrenheit):
 
 def weather():
     """Display SenseHAT data on the 8x8 LED grid"""
-    data_lst = get_sensor_data()
-    sense_data = ("Temp. F {} Temp. C {} Hum. {} Press. {} DewPoint {}"
-                    .format(data_lst[1], data_lst[0], data_lst[2], data_lst[3], data_lst[4]))
+    data_lst = get_csv_data()
+    sense_data = ("{}        AQI:{}        "
+                    .format(data_lst[9], data_lst[-1]))
     print(sense_data)
     set_orientation()
-    bg_color = set_screen_color(data_lst[1])
-    sense.show_message(sense_data, scroll_speed=0.10, back_colour=bg_color, text_colour=WHITE)
+
+    # bg_color = set_screen_color(data_lst[9][0])
+    sense.show_message(sense_data, scroll_speed=0.10, back_colour=PURPLE, text_colour=BRIGHT_WHITE)
 
 
 while __name__ == '__main__':
     weather()
+
+
+
+
+
 
