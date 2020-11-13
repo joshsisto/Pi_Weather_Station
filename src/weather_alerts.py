@@ -14,7 +14,7 @@ def get_csv_data():
     """Open the daily csv log and return the content"""
     csv_list = []
     day = get_timestamp().split()[0]
-    csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
+    csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)) + '/logs/', day + '.csv')
     # csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
     with open(csv_path, 'r') as csv_file:
         # content = f.read()
@@ -41,11 +41,11 @@ def get_gov_aqi():
     """Read the most recent aqi log and return the stats"""
     csv_content = get_csv_data()
     most_recent = csv_content[-1]
-    aqi_string = most_recent[10]
-    aqi_list = aqi_string.strip('][').split(', ')
-    aqi = aqi_list[0]
-    air_cond = aqi_list[1].strip("'")
-    return [aqi, air_cond]
+    # aqi_string = most_recent[10]
+    # aqi_list = aqi_string.strip('][').split(', ')
+    # aqi = aqi_list[0]
+    # air_cond = aqi_list[1].strip("'")
+    return [most_recent]
 
 
 def read_alert():
@@ -97,7 +97,7 @@ def check_air():
         alert_cont = read_alert()
         maximum_aqi = int(alert_cont['aqi_max'])
         current_aqi = get_gov_aqi()[0]
-        current_aqi = float(current_aqi)            
+        current_aqi = float(current_aqi[-1]) 
         if current_aqi >= maximum_aqi:
             print('Current AQI exceeds maximum threshhold set')
             print('Check https://pi.sisto.solutions/alerts')
@@ -111,13 +111,25 @@ def check_air():
 
 
 if check_max() == True:
-    send_email('Max Temp Reached', 'Check https://pi.sisto.solutions')
+    alert_cont = read_alert()
+    maximum_temp = int(alert_cont['max_temp'])
+    current_temp = get_dark_sky()[0]
+    current_temp = str(current_temp)
+    send_email('Max Temp Reached', current_temp + '°  ' + 'Check https://pi.sisto.solutions')
 
 
 if check_min() == True:
-    send_email('Min Temp Reached', 'Check https://pi.sisto.solutions')
+    alert_cont = read_alert()
+    minimum_temp = int(alert_cont['min_temp'])
+    current_temp = get_dark_sky()[0]
+    current_temp = str(current_temp)      
+    send_email('Min Temp Reached', current_temp + '°  ' + 'Check https://pi.sisto.solutions')
 
 
 if check_air() == True:
-    send_email('AQI max threshold crossed', '😷')
+    alert_cont = read_alert()
+    maximum_aqi = int(alert_cont['aqi_max'])
+    current_aqi = get_gov_aqi()[0]
+    current_aqi = str(current_aqi[-1]) 
+    send_email('AQI max threshold crossed', current_aqi + '   😷')
 
