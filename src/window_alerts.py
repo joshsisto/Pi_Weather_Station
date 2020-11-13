@@ -15,7 +15,7 @@ def get_csv_data():
     global csv_path
     csv_list = []
     day = get_timestamp().split()[0]
-    csv_path = os.path.join(os.path.dirname(__file__) + '/logs/', day + '.csv')
+    csv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)) + '/logs/', day + '.csv')
     # csv_path = '/home/pi/Pi_Weather_Station/src/logs/' + day + '.csv'
     with open(csv_path, 'r') as csv_file:
         # content = f.read()
@@ -68,4 +68,3 @@ if os.path.exists(alert_file_path) == False:
         alert_flag = open(alert_file_path, 'w+')
         print("Sending Text")
         send_email('It is 74 degrees or cooler! Time to open the windows')
-
