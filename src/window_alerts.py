@@ -4,6 +4,7 @@ import csv
 import os
 import ast
 import glob
+import json
 from math import log
 from sense_hat import SenseHat
 from weather import get_timestamp
@@ -44,20 +45,28 @@ def get_dark_sky():
 
 
 def check_min():
+    global current_temp
+    global daily_high_temp
     try:
         # alert_cont = read_alert()
-        minimum_temp = 74
-        current_temp = get_dark_sky()[0]
-        current_temp = float(current_temp)            
-        if current_temp <= minimum_temp:
-            print('It is 74 degrees or cooler! Time to open the windows')
-            return True
-        else:
-            print('Temperature is within limit set')
-            return False
+        with open('/home/pi/Pi_Weather_Station/src/weather.json') as json_file:
+            data = json.load(json_file)
+            today_temp_hi = data['daily']['data'][0]['temperatureHigh']
+            minimum_temp = 74
+            current_temp = get_dark_sky()[0]
+            current_temp = float(current_temp)
+            daily_high_temp = float(today_temp_hi)
+            if daily_high_temp >= 80 and current_temp >= 74:
+                print('It is 74 degrees or warmer! Time to close the windows')
+                return True
+            else:
+                print('Temperature is within limit set')
+                return False
     except:
         print('That did not work.')
         print('probably did not have a value set for minimum temp')
+        print(current_temp, daily_high_temp)
+        
 
 alert_file_path = csv_path[:-3] + 'alert'
 
@@ -67,4 +76,9 @@ if os.path.exists(alert_file_path) == False:
         print("Temp reached! creating alert flag")
         alert_flag = open(alert_file_path, 'w+')
         print("Sending Text")
-        send_email('It is 74 degrees or cooler! Time to open the windows')
+        email_message = 'It is {} outside with a High of {}. You should close the windows to keep the house cool. Love you!'.format(current_temp, daily_high_temp)
+        print(email_message)
+        send_email(email_message)
+
+print('need to print something')
+print(alert_file_path)

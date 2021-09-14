@@ -66,7 +66,7 @@ def convert_time(time_string):
     return time.ctime(time_string)
 
 
-weather_url = 'https://api.darksky.net/forecast/cd562f431296f113d3a618a7ea1d94ef/38.561936,-121.423951'
+weather_url = 'https://api.darksky.net/forecast/cd562f431296f113d3a618a7ea1d94ef/38.66656513663031,-121.23474707329359'
 # air_url = 'http://www.airnowapi.org/aq/observation/zipCode/current/?format=application/json&zipCode=95817&distance=1&API_KEY=F62EEA9E-1177-456C-89B2-94CA763972C6'
 air_url = 'https://api.waqi.info/feed/sacramento/?token=28d3d84006120659c5cabef3b6546de50cbec618'
 
