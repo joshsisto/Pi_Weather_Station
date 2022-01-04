@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, Response, url_for
 from sendEmail import send_email
 from weather import get_timestamp
 from sense_hat import SenseHat
@@ -9,6 +9,7 @@ import ast
 import tablib
 import pandas as pd
 import json
+import datetime
 
 
 app = Flask(__name__)
@@ -205,6 +206,12 @@ def logs_web():
     update_logs_html()
     return render_template('logs.html')
 
+# adding a clock
+@app.route('/time_feed')
+def time_feed():
+    def generate():
+        yield datetime.now().strftime("%Y.%m.%d|%H:%M:%S")  # return also will work
+    return Response(generate(), mimetype='text') 
 
 while __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
