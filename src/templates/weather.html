@@ -28,6 +28,13 @@
     </nav>
     <div id="location">
         Fair Oaks California USA 🇺🇸 
+        <p id="clock">Here will be date|time</p>
+
+        <script>
+            var clock = document.getElementById("clock");
+            let d = new Date()
+            document.getElementById("clock").innerHTML = d;
+        </script>
     </div>
 
     <div id="currentDetails">
@@ -147,13 +154,6 @@
     <footer>
         <p>Code hosted on <a href="https://github.com/joshsisto/Pi_Weather_Station">GitHub</a></p>
     </footer>
-    <p id="clock">Here will be date|time</p>
-
-    <script>
-        var clock = document.getElementById("clock");
-        let d = new Date()
-        document.getElementById("clock").innerHTML = "Today's date is " + d;
-    </script>
 
 </body>
 
