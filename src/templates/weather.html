@@ -20,8 +20,9 @@
             <ul>
                 <li><a href="alerts">Alerts</a></li>
                 <li><a href="logs">Logs</a></li>
+                <li><a href="https://josh.sisto.solutions/pi_weather_logs/">Log History</a></li>
                 <li><a href="https://darksky.net">Dark Sky</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="https://josh.sisto.solutions/">About</a></li>
             </ul>
 
         </div>
@@ -29,12 +30,17 @@
     <div id="location">
         Fair Oaks California USA 🇺🇸 
         <p id="clock">Here will be date|time</p>
-
         <script>
             var clock = document.getElementById("clock");
-            let d = new Date()
-            document.getElementById("clock").innerHTML = d;
+            let d = new Date();
+            document.getElementById("clock").innerHTML = d;        
         </script>
+
+        <!-- <p id="offset">Here is where the offset will be</p>
+        <script>
+            var offset = new Date().getTimezoneOffset();
+            document.getElementbyId("offset").innerHTML = offset
+        </script> -->
     </div>
 
     <div id="currentDetails">
